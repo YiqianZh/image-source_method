@@ -1,0 +1,300 @@
+\documentclass[pl,12pt]{aghdpl}
+% \documentclass[en,11pt]{aghdpl}  % praca w języku angielskim
+
+% Lista wszystkich języków stanowiących języki pozycji bibliograficznych użytych w pracy.
+% (Zgodnie z zasadami tworzenia bibliografii każda pozycja powinna zostać utworzona zgodnie z zasadami języka, w którym dana publikacja została napisana.)
+\usepackage[english,polish]{babel}
+
+% Użyj polskiego łamania wyrazów (zamiast domyślnego angielskiego).
+\usepackage{polski}
+
+\usepackage[utf8]{inputenc}
+
+% Załączniki
+
+\usepackage[toc, page]{appendix}
+\renewcommand\appendixpagename{Załączniki}
+\renewcommand\appendixtocname{Załączniki}
+
+% dodatkowe pakiety
+
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{float}% do umieszczenia floatów [H]
+\usepackage{enumitem}
+\setlist{nosep} % or \setlist{noitemsep} to leave space around whole list
+\usepackage[bookmarks,hidelinks]{hyperref}
+
+% Środowisko float do kodu źródłowego \begin{program}
+
+\floatstyle{plaintop}
+\ifcsname{chapter}\endcsname%
+    \newfloat{program}{!tbh}{lop}[chapter]
+\else%
+    \newfloat{program}{!tbh}{lop}
+\fi
+\floatname{program}{Kod źr.}
+
+% Kod poniżej powoduje, że floaty nie wylatują poza granice sekcji
+
+\usepackage{placeins}
+
+\ifcsname{chapter}\endcsname%
+    \let\Oldchapter\chapter%
+    \renewcommand{\chapter}{\FloatBarrier\Oldchapter}
+\fi
+
+\let\Oldsection\section%
+\renewcommand{\section}{\FloatBarrier\Oldsection}
+
+\let\Oldsubsection\subsection%
+\renewcommand{\subsection}{\FloatBarrier\Oldsubsection}
+
+\let\Oldsubsubsection\subsubsection%
+\renewcommand{\subsubsection}{\FloatBarrier\Oldsubsubsection}
+
+% --- < bibliografia > ---
+
+
+\usepackage[
+style=numeric,
+sorting=none,
+%
+% Zastosuj styl wpisu bibliograficznego właściwy językowi publikacji.
+language=autobib,
+autolang=other,
+% Zapisuj datę dostępu do strony WWW w formacie RRRR-MM-DD.
+urldate=iso,
+seconds=true,
+% Nie dodawaj numerów stron, na których występuje cytowanie.
+backref=false,
+% Podawaj ISBN.
+isbn=true,
+% Nie podawaj URL-i, o ile nie jest to konieczne.
+url=false,
+%
+% Ustawienia związane z polskimi normami dla bibliografii.
+maxbibnames=3,
+% Jeżeli używamy Bibera:
+backend=biber
+]{biblatex}
+
+\usepackage{csquotes}
+% Ponieważ `csquotes` nie posiada polskiego stylu, można skorzystać z mocno zbliżonego stylu chorwackiego.
+\DeclareQuoteAlias{croatian}{polish}
+
+\addbibresource{bibliografia.bib}
+
+% Przecinki zamiast kropek do oddzielenia pól wpisu bibliograficznego
+% i dwukropek po nazwisku autora, bez kropki na końcu
+\AtBeginBibliography{
+    \renewcommand\labelnamepunct{:\space}
+    \renewcommand\newunitpunct{\addcomma\space}
+    \renewcommand{\finentrypunct}{}
+    
+    \renewcommand{\bibopenparen}{\addcomma\addspace}
+    \renewcommand{\bibcloseparen}{\addspace}
+}
+
+% Nie wyświetlaj wybranych pól.
+%\AtEveryBibitem{\clearfield{note}}
+
+
+% ------------------------
+% --- < listingi > ---
+
+% Użyj czcionki kroju Times.
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+
+\usepackage{listings}
+\lstset{language=TeX}
+
+\lstset{%
+        literate={ą}{{\k{a}}}1
+           {ć}{{\'c}}1
+           {ę}{{\k{e}}}1
+           {ó}{{\'o}}1
+           {ń}{{\'n}}1
+           {ł}{{\l{}}}1
+           {ś}{{\'s}}1
+           {ź}{{\'z}}1
+           {ż}{{\.z}}1
+           {Ą}{{\k{A}}}1
+           {Ć}{{\'C}}1
+           {Ę}{{\k{E}}}1
+           {Ó}{{\'O}}1
+           {Ń}{{\'N}}1
+           {Ł}{{\L{}}}1
+           {Ś}{{\'S}}1
+           {Ź}{{\'Z}}1
+           {Ż}{{\.Z}}1
+}
+
+% Ustawienia pakietu lstlisting do umieszczania kodu
+
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{%
+  backgroundcolor=\color{white},     % choose the background color
+  basicstyle=\ttfamily\footnotesize, % size of fonts used for the code
+  breaklines, breakatwhitespace,     % automatic line breaking only at whitespace
+  commentstyle=\color{mygreen},      % comment style
+  numbers=left,
+  showstringspaces=false,
+  numberstyle=\tiny,
+  frame=l,
+  escapeinside={*@}{@*},           % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},         % keyword style
+  stringstyle=\color{mymauve}        % string literal style
+}
+
+% ------------------------
+
+\AtBeginDocument{%
+        \renewcommand{\tablename}{Tab.}
+        \renewcommand{\figurename}{Rys.}
+}
+
+% ------------------------
+% --- < tabele > ---
+
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage[flushleft]{threeparttable}
+
+% defines the X column to use m (\parbox[c]) instead of p (`parbox[t]`)
+\newcolumntype{C}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}
+
+
+%---------------------------------------------------------------------------
+
+\author{{[Imiona i Nazwisko]}}
+
+\makeatletter% Poniższe makra są wyłącznie zdefiniowane w klasie aghdpl-imir
+\@ifclassloaded{aghdpl}{%
+
+  \sex{m} % Rodzaj osobowych form czasowników: m - męski, ż - żeński
+  \shortauthor{{[Im.\ i nazwisko]}}
+  \albumnum{{[xxxxxx]}}
+  \address{{[Adres]}}
+
+  \titlePL{{[Bardzo długi temat niezwykle dogłębnej pracy dyplomowej inżynierskiej debatującej nad ekstraordynaryjnie pasjonującym zagadnieniem]}}
+  \titleEN{{[Very long title of extremely indepth engineer dimploma thesis exploring an extraordinarily interesing subject]}}
+
+  \shorttitlePL{{[Skrócony temat pracy]}} % skrócona wersja tytułu
+  \shorttitleEN{{[Short thesis subject]}}
+
+  % rodzaj pracy bez końcówki fleksyjnej np. inżyniersk, magistersk
+  \thesistypePL{magistersk}
+  \thesistypeEN{engineer}
+
+  \supervisor{{[Tytuł, imię i nazwisko promotora]}}
+
+  \reviewer{{[Tytuł, imię i nazwisko recenzenta]}}
+
+  \degreeprogrammePL{{[Nazwa kierunku studiów]}}
+  \degreeprogrammeEN{{[Field of Study]}}
+
+  \specialisationPL{{[Nazwa specjalności]}}
+  \specialisationEN{{[Specialisation]}}
+
+  \graduationyear{{[Rok ukończenia]}}
+  \years{2017/2018}
+  \yearofstudy{IV}
+  \formPL{stacjonarne}
+  \formEN{full-time}
+
+  % zgoda na publikację pracy w internecie: t-zgoda, cokolwiek 
+  % innego-brak zgody
+  \agree{t}
+
+  % praktyka (dyplomowa)
+  \apprenticeship{{[Praktyka dyplomowa]}}
+
+  \department{Katedra Transportu Linowego}
+
+  \facultyPL{Wydział Inżynierii Mechanicznej i Robotyki}
+  \facultyEN{Faculty of Mechanical Engineering and Robotics}
+
+  \thesisplan{% Przykładowy plan pracy, należy omówić z promotorem
+    \begin{enumerate}
+    \item Omówienie tematu pracy i sposobu realizacji z promotorem.
+    \item Zebranie i opracowanie literatury dotyczącej tematu pracy.
+    \item Zebranie i opracowanie wyników badań.
+    \item Analiza wyników badań, ich omówienie i zatwierdzenie przez promotora.
+    \item Opracowanie redakcyjne.
+    \end{enumerate}
+  }
+
+  \summaryPL{\indent\indent%
+	  {[Treść streszczenia]}
+  }
+  \summaryEN{\indent\indent%
+	  {[Summary text]}
+  }
+
+  \acknowledgements{%
+    Serdecznie dziękuję \dots tu ciąg dalszych podziękowań np.\ dla promotora,
+    żony, sąsiada itp.
+  }
+
+  \setlength{\cftsecnumwidth}{10mm}
+}{}%
+\makeatother%
+
+\date{\today}
+
+%---------------------------------------------------------------------------
+\setcounter{secnumdepth}{4}
+\brokenpenalty=10000\relax
+
+\begin{document}
+
+\titlepages{}
+
+% Ponowne zdefiniowanie stylu `plain`, aby usunąć numer strony z pierwszej strony spisu treści i poszczególnych rozdziałów.
+\fancypagestyle{plain}
+{%
+        % Usuń nagłówek i stopkę
+        \fancyhf{}
+        % Usuń linie.
+        \renewcommand{\headrulewidth}{0pt}
+        \renewcommand{\footrulewidth}{0pt}
+}
+
+\setcounter{tocdepth}{2}
+{\singlespacing\tableofcontents}
+\clearpage
+
+\include{rozdzial3}
+\include{rozdzial1}
+\include{rozdzial2}
+\include{tests}
+
+%Kod poniżej dodaje Bibliografię do spisu treści
+\cleardoublepage{}
+\phantomsection{}
+\addcontentsline{toc}{chapter}{Bibliografia}
+\printbibliography{}
+
+% Załączniki
+\begin{appendices}
+  \makeatletter% Kod poniżej powoduje ustęp w spisie treści
+  \addtocontents{toc}{\let\protect\l@chapter\protect\l@section}
+  \input{zalocznikA}
+  % \input{zalocznikB}
+  % itd.
+  \makeatother%
+\end{appendices}
+
+\end{document}

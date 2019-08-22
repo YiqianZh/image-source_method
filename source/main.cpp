@@ -2,7 +2,7 @@
 #include <vector>
 #include <fstream>
 #define print_point false
-
+#define write_file false
 using namespace std;
 
 struct Plane
@@ -44,51 +44,30 @@ Point mirror(Point p, Wall w)
     return {2*xo-p.x, 2*yo-p.y, 2*zo-p.z};
 }
 
-class Node
-{
-public:
-	int wall_id;
-	Point source;
-	int level;
-	vector<Node> nodes;
-	void initialize(Wall *walls, int n, int lvl)
-	{
-	    if( level != lvl )
-        {
-            for(int i = 0; i<n; i++)
-            {
-                if(i != wall_id)
-                {
-                    nodes.push_back({i,mirror(source, walls[i]), level+1});
-                    //cout << "Node " << i << " with parent " << wall_id << " and image source ( " << nodes.back().source.x << " , " << nodes.back().source.y << " , " << nodes.back().source.z << " )" << endl;
-                    nodes.back().initialize(walls, n, lvl);
-                }
-            }
-        }
-
-	}
-};
-
 int main()
 {
 
+#if write_file
     ofstream myfile;
     myfile.open ("example.txt");
+#endif // write_file
 
     double a = 3;
     double b = 5;
     double h = 2.3;
-    const int level = 3;
+    const int level = 6;
     const int N = 6;
     int liczba = 1;
     for(int i = 0 ; i < level ; i++)
             liczba=liczba*N;
+#if write_file
     myfile<<"Wielokat(("<<-a<<","<<-b<<","<<-h<<"),("<<-a<<","<<-b<<","<<h<<"),("<<a<<","<<-b<<","<<h<<"),("<<a<<","<<-b<<","<<-h<<"))\n";
     myfile<<"Wielokat(("<<-a<<","<<b<<","<<-h<<"),("<<-a<<","<<b<<","<<h<<"),("<<a<<","<<b<<","<<h<<"),("<<a<<","<<b<<","<<-h<<"))\n";
     myfile<<"Wielokat(("<<-a<<","<<-b<<","<<-h<<"),("<<-a<<","<<-b<<","<<h<<"),("<<-a<<","<<b<<","<<h<<"),("<<-a<<","<<b<<","<<-h<<"))\n";
     myfile<<"Wielokat(("<<a<<","<<-b<<","<<-h<<"),("<<a<<","<<-b<<","<<h<<"),("<<a<<","<<b<<","<<h<<"),("<<a<<","<<b<<","<<-h<<"))\n";
     myfile<<"Wielokat(("<<a<<","<<b<<","<<h<<"),("<<-a<<","<<b<<","<<h<<"),("<<-a<<","<<-b<<","<<h<<"),("<<a<<","<<-b<<","<<h<<"))\n";
     myfile<<"Wielokat(("<<a<<","<<b<<","<<-h<<"),("<<-a<<","<<b<<","<<-h<<"),("<<-a<<","<<-b<<","<<-h<<"),("<<a<<","<<-b<<","<<-h<<"))\n";
+#endif // write_file
 
 	Wall walls[N];
 	walls[0] = { {0, 0, 1, h} , {-a, -b, -h}, {a, b, -h}, 0.71 };
@@ -100,13 +79,16 @@ int main()
 
 	Point source = { 0.2, 0.4, 0.3 };
 	Point receiver = { 0.6, -1.7, 0.4};
+
+#if write_file
 	myfile << "S = (" << source.x << ", " << source.y << ", " << source.z << ")\n";
 	myfile << "R = (" << receiver.x << ", " << receiver.y << ", " << receiver.z << ")\n";
+#endif // write_file
 
     int tab[level];
 
     int xx = 8;
-    for(int j = 1 ; j < N*N*N ; j++)
+    for(int j = 1 ; j < liczba ; j++)
     {
     int L = j;
     bool czy_zly = false;
@@ -125,7 +107,10 @@ int main()
     for(int i = 0 ; i<level; i++)
     {
         im_s = mirror(im_s,walls[tab[i]]);
+#if write_file
         myfile << "S" << i+1 << " = (" << im_s.x << ", " << im_s.y << ", " << im_s.z << ")\n";
+#endif // write_file
+
     }
     im_s.print();
 
@@ -140,7 +125,9 @@ int main()
         A.print();
         double t = -(walls[tab[i]].pl.A*A.x + walls[tab[i]].pl.B*A.y + walls[tab[i]].pl.C*A.z + walls[tab[i]].pl.D)/(walls[tab[i]].pl.A*vN.x + walls[tab[i]].pl.B*vN.y + walls[tab[i]].pl.C*vN.z);
         Point cross = { vN.x*t + A.x ,  vN.y*t + A.y , vN.z*t + A.z };
+#if write_file
         myfile << "C" << i << " = (" << cross.x << ", " << cross.y << ", " << cross.z <<")\n";
+#endif // write_file
         cross.print(); //sprawdzic czy croos jest w plane
 
         if( vN.x*walls[tab[i]].pl.A + vN.y*walls[tab[i]].pl.B + vN.z*walls[tab[i]].pl.C < 0)
@@ -161,14 +148,16 @@ int main()
         A = cross;
         cross.print();
     }
-    if(czy_zly == false)
+    if(czy_zly == false && czy_wektor == false)
     {
-        std::cout << j << ":   " << tab[0] << " - " << tab[1] << " - " << tab[2];
-        if(czy_wektor)
-            std::cout << " - olaboga!!!";
-        std::cout << std::endl;
+         std::cout << j << ": ";
+        for(int x = 0; x<level-1 ; x++)
+            std::cout << tab[x] << " - ";
+        std::cout << tab[level-1] << "\n";
     }
     }
+
+    #if write_file
     myfile << "Odcinek(S, C0)\n";
     for(int i = 0; i<level-1; i++)
     {
@@ -176,6 +165,7 @@ int main()
     }
     myfile << "Odcinek(C" << level-1 << ", R)\n";
     myfile.close();
+    #endif // write_file
 
     return 0;
 }
