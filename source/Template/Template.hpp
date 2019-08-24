@@ -66,7 +66,17 @@ cl_uint level;
 cl_uint walls;
 
 /* The memory buffer that is used as input/output for OpenCL kernel */
-cl_mem   inputBuffer;
+cl_mem   plABuffer;
+cl_mem plBBuffer;
+cl_mem plCBuffer;
+cl_mem plDBuffer;
+cl_mem pt1xBuffer;
+cl_mem pt1yBuffer;
+cl_mem pt1zBuffer;
+cl_mem pt2xBuffer;
+cl_mem pt2yBuffer;
+cl_mem pt2zBuffer;
+cl_mem absoBuffer;
 cl_mem	 outputBuffer;
 
 cl_context          context;

@@ -36,5 +36,5 @@ __kernel void templateKernel(__global  float * output,
 {
     uint tid = get_global_id(0);
 	
-	output[tid] = input[tid] * multiplier;
+	output[tid] = plA[tid];
 }

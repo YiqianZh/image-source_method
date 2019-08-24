@@ -46,7 +46,7 @@ initializeHost(void)
     /////////////////////////////////////////////////////////////////
     // Allocate and initialize memory used by host 
     /////////////////////////////////////////////////////////////////
-    cl_uint sizeInBytes = width * sizeof(cl_float);
+    cl_uint sizeInBytes = walls * sizeof(cl_float);
 	plA   = (cl_float *) malloc(sizeInBytes);
 	plB   =	(cl_float *) malloc(sizeInBytes);
 	plC   =	(cl_float *) malloc(sizeInBytes);
@@ -234,7 +234,7 @@ initializeCL(void)
     cl_context_properties cps[3] = { CL_CONTEXT_PLATFORM, (cl_context_properties)platform, 0 };
 
     context = clCreateContextFromType(cps, 
-                                      CL_DEVICE_TYPE_GPU, 
+                                      CL_DEVICE_TYPE_CPU, 
                                       NULL, 
                                       NULL, 
                                       &status);
@@ -311,17 +311,128 @@ initializeCL(void)
     //          These buffer objects can be passed to the kernel
     //          as kernel arguments
     /////////////////////////////////////////////////////////////////
-    //inputBuffer = clCreateBuffer(
-    //                  context, 
-    //                  CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
-    //                  sizeof(cl_uint) * width,
-    //                  input, 
-    //                  &status);
-    //if(status != CL_SUCCESS) 
-    //{ 
-    //    std::cout << "Error: clCreateBuffer (inputBuffer)\n";
-    //    return SDK_FAILURE;
-    //}
+    plABuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (plABuffer)\n";
+        return SDK_FAILURE;
+    }
+
+	plBBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (plBBuffer)\n";
+        return SDK_FAILURE;
+    }
+	plCBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (plCBuffer)\n";
+        return SDK_FAILURE;
+    }
+	plDBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (plDBuffer)\n";
+        return SDK_FAILURE;
+    }
+	pt1xBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (pt1xBuffer)\n";
+        return SDK_FAILURE;
+    }
+	pt1yBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (pt1yBuffer)\n";
+        return SDK_FAILURE;
+    }
+	pt1zBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (pt1zBuffer)\n";
+        return SDK_FAILURE;
+    }
+	pt2xBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (pt2xBuffer)\n";
+        return SDK_FAILURE;
+    }
+	pt2yBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (pt2yBuffer)\n";
+        return SDK_FAILURE;
+    }
+	pt2zBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (pt2zBuffer)\n";
+        return SDK_FAILURE;
+    }
+	absoBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_float) * walls,
+                      plA, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (absoBuffer)\n";
+        return SDK_FAILURE;
+    }
 
     outputBuffer = clCreateBuffer(
                        context, 
@@ -494,8 +605,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     1, 
-                    walls*sizeof(cl_float), 
-                    (void *)plA);
+                    sizeof(cl_mem), 
+                    (void *)&plABuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (plA)\n";
@@ -506,8 +617,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     2, 
-                    walls*sizeof(cl_float), 
-                    (void *)plB);
+                    sizeof(cl_mem), 
+                    (void *)&plBBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (plB)\n";
@@ -518,8 +629,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     3, 
-                    walls*sizeof(cl_float), 
-                    (void *)plC);
+                    sizeof(cl_mem), 
+                    (void *)&plCBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (plC)\n";
@@ -530,8 +641,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     4, 
-                    walls*sizeof(cl_float), 
-                    (void *)plD);
+                    sizeof(cl_mem), 
+                    (void *)&plDBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (plD)\n";
@@ -542,8 +653,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     5, 
-                    walls*sizeof(cl_float), 
-                    (void *)pt1x);
+                    sizeof(cl_mem), 
+                    (void *)&pt1xBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (pt1x)\n";
@@ -554,8 +665,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     6, 
-                    walls*sizeof(cl_float), 
-                    (void *)pt1y);
+                    sizeof(cl_mem), 
+                    (void *)&pt1yBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (plA)\n";
@@ -566,8 +677,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     7, 
-                    walls*sizeof(cl_float), 
-                    (void *)pt1z);
+                    sizeof(cl_mem), 
+                    (void *)&pt1zBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (pt1z)\n";
@@ -578,8 +689,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     8, 
-                    walls*sizeof(cl_float), 
-                    (void *)pt2x);
+                    sizeof(cl_mem), 
+                    (void *)&pt2xBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (pt2x)\n";
@@ -590,8 +701,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     9, 
-                    walls*sizeof(cl_float), 
-                    (void *)pt2y);
+                    sizeof(cl_mem), 
+                    (void *)&pt2yBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (pt2y)\n";
@@ -602,8 +713,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     10, 
-                    walls*sizeof(cl_float), 
-                    (void *)pt2z);
+                    sizeof(cl_mem), 
+                    (void *)&pt2zBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (pt2z)\n";
@@ -614,8 +725,8 @@ runCLKernels(void)
 	status = clSetKernelArg(
                     kernel, 
                     11, 
-                    walls*sizeof(cl_float), 
-                    (void *)abso);
+                    sizeof(cl_mem), 
+                    (void *)&absoBuffer);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (abso)\n";
@@ -747,10 +858,70 @@ cleanupCL(void)
         std::cout << "Error: In clReleaseProgram\n";
         return SDK_FAILURE; 
     }
-    status = clReleaseMemObject(inputBuffer);
+    status = clReleaseMemObject(plABuffer);
     if(status != CL_SUCCESS)
     {
-        std::cout << "Error: In clReleaseMemObject (inputBuffer)\n";
+        std::cout << "Error: In clReleaseMemObject (plABuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(plBBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (plBBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(plCBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (plCBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(plDBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (plDBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(pt1xBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (pt1xBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(pt1yBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (pt1yBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(pt1zBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (pt1zBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(pt2xBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (pt2xBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(pt2yBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (pt2yBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(pt2zBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (pt2zBuffer)\n";
+        return SDK_FAILURE; 
+    }
+	status = clReleaseMemObject(absoBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (absoBuffer)\n";
         return SDK_FAILURE; 
     }
     status = clReleaseMemObject(outputBuffer);
