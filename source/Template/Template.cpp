@@ -40,8 +40,9 @@ initializeHost(void)
 	pt2y				= NULL;
 	pt2z				= NULL;
 	abso				= NULL;
+	cache				= NULL;
     output              = NULL;
-    multiplier          = 3;
+    multiplier          = 2;
 
     /////////////////////////////////////////////////////////////////
     // Allocate and initialize memory used by host 
@@ -58,6 +59,7 @@ initializeHost(void)
 	pt2y  =	(cl_float *) malloc(sizeInBytes);
 	pt2z  =	(cl_float *) malloc(sizeInBytes);
 	abso   =	(cl_float *) malloc(sizeInBytes);
+	cache = (cl_uint *) malloc(level * sizeof(cl_uint));
                
     if(!abso)
     {
@@ -234,7 +236,7 @@ initializeCL(void)
     cl_context_properties cps[3] = { CL_CONTEXT_PLATFORM, (cl_context_properties)platform, 0 };
 
     context = clCreateContextFromType(cps, 
-                                      CL_DEVICE_TYPE_CPU, 
+                                      CL_DEVICE_TYPE_GPU, 
                                       NULL, 
                                       NULL, 
                                       &status);
@@ -431,6 +433,17 @@ initializeCL(void)
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: clCreateBuffer (absoBuffer)\n";
+        return SDK_FAILURE;
+    }
+	cacheBuffer = clCreateBuffer(
+                      context, 
+                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      sizeof(cl_uint) * level,
+                      cache, 
+                      &status);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: clCreateBuffer (cacheBuffer)\n";
         return SDK_FAILURE;
     }
 
@@ -733,12 +746,23 @@ runCLKernels(void)
         return SDK_FAILURE;
     }
 
+	status = clSetKernelArg(
+                    kernel, 
+                    12, 
+                    sizeof(cl_mem), 
+                    (void *)&cacheBuffer);
+    if(status != CL_SUCCESS) 
+    { 
+        std::cout << "Error: Setting kernel argument. (cache)\n";
+        return SDK_FAILURE;
+    }
+
 
 
     // multiplier
     status = clSetKernelArg(
                     kernel, 
-                    12, 
+                    13, 
                     sizeof(cl_uint), 
                     (void *)&multiplier);
     if(status != CL_SUCCESS) 
@@ -924,6 +948,12 @@ cleanupCL(void)
         std::cout << "Error: In clReleaseMemObject (absoBuffer)\n";
         return SDK_FAILURE; 
     }
+	status = clReleaseMemObject(cacheBuffer);
+    if(status != CL_SUCCESS)
+    {
+        std::cout << "Error: In clReleaseMemObject (cacheBuffer)\n";
+        return SDK_FAILURE; 
+    }
     status = clReleaseMemObject(outputBuffer);
     if(status != CL_SUCCESS)
     {
@@ -1011,6 +1041,11 @@ cleanupHost(void)
 	{
 	    free(abso);
 	    abso = NULL;
+	}
+	if(cache != NULL)
+	{
+	    free(cache);
+	    cache = NULL;
 	}
     if(output != NULL)
     {
