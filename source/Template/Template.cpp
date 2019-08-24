@@ -327,7 +327,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      plB, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -338,7 +338,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      plC, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -349,7 +349,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      plD, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -360,7 +360,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      pt1x, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -371,7 +371,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      pt1y, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -382,7 +382,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      pt1z, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -393,7 +393,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      pt2x, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -404,7 +404,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      pt2y, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -415,7 +415,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      pt2z, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -426,7 +426,7 @@ initializeCL(void)
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
-                      plA, 
+                      abso, 
                       &status);
     if(status != CL_SUCCESS) 
     { 
@@ -1093,7 +1093,6 @@ main(int argc, char * argv[])
 
     // Release host resources
     cleanupHost();
-	int a;
-	std::cin >> a;
+
     return SDK_SUCCESS;
 }

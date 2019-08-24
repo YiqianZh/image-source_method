@@ -31,10 +31,10 @@ __kernel void templateKernel(__global  float * output,
 							 __global  float * pt2x,
 							 __global  float * pt2y,
 							 __global  float * pt2z,
-							 __global  float * abs,
+							 __global  float * abso,
                              const     unsigned int multiplier)
 {
     uint tid = get_global_id(0);
 	
-	output[tid] = plA[tid];
+	output[tid] = abso[tid];
 }
