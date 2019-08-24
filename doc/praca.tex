@@ -178,38 +178,38 @@ backend=biber
 
 %---------------------------------------------------------------------------
 
-\author{{[Imiona i Nazwisko]}}
+\author{{Dominik Szymaniak}}
 
 \makeatletter% Poniższe makra są wyłącznie zdefiniowane w klasie aghdpl-imir
 \@ifclassloaded{aghdpl}{%
 
   \sex{m} % Rodzaj osobowych form czasowników: m - męski, ż - żeński
-  \shortauthor{{[Im.\ i nazwisko]}}
-  \albumnum{{[xxxxxx]}}
+  \shortauthor{{D.\ Szymaniak}}
+  \albumnum{{269564}}
   \address{{[Adres]}}
 
-  \titlePL{{[Bardzo długi temat niezwykle dogłębnej pracy dyplomowej inżynierskiej debatującej nad ekstraordynaryjnie pasjonującym zagadnieniem]}}
-  \titleEN{{[Very long title of extremely indepth engineer dimploma thesis exploring an extraordinarily interesing subject]}}
+  \titlePL{{Zastosowanie procesorów graficznych do obliczeń akustycznych}}
+  \titleEN{{Implementation of graphics processing units for acoustic calculations}}
 
-  \shorttitlePL{{[Skrócony temat pracy]}} % skrócona wersja tytułu
-  \shorttitleEN{{[Short thesis subject]}}
+  \shorttitlePL{{Zastosowanie procesorów graficznych do obliczeń akustycznych}} % skrócona wersja tytułu
+  \shorttitleEN{{Implementation of graphics processing units for acoustic calculations}}
 
   % rodzaj pracy bez końcówki fleksyjnej np. inżyniersk, magistersk
   \thesistypePL{magistersk}
   \thesistypeEN{engineer}
 
-  \supervisor{{[Tytuł, imię i nazwisko promotora]}}
+  \supervisor{{dr Marek Pluta}}
 
-  \reviewer{{[Tytuł, imię i nazwisko recenzenta]}}
+  \reviewer{{dr hab. Inż. Mariusz Giergiel, prof. AGH}}
 
-  \degreeprogrammePL{{[Nazwa kierunku studiów]}}
-  \degreeprogrammeEN{{[Field of Study]}}
+  \degreeprogrammePL{{Inżynieria Akustyczna}}
+  \degreeprogrammeEN{{Acoustic Engineering}}
 
-  \specialisationPL{{[Nazwa specjalności]}}
+  \specialisationPL{{Drgania i Hałas w Technice i Środowisku (D)}}
   \specialisationEN{{[Specialisation]}}
 
-  \graduationyear{{[Rok ukończenia]}}
-  \years{2017/2018}
+  \graduationyear{{2019}}
+  \years{2018/2019}
   \yearofstudy{IV}
   \formPL{stacjonarne}
   \formEN{full-time}
@@ -258,6 +258,7 @@ backend=biber
 \setcounter{secnumdepth}{4}
 \brokenpenalty=10000\relax
 
+
 \begin{document}
 
 \titlepages{}
@@ -276,9 +277,12 @@ backend=biber
 {\singlespacing\tableofcontents}
 \clearpage
 
-\include{rozdzial3}
 \include{rozdzial1}
 \include{rozdzial2}
+\include{rozdzial3}
+\include{rozdzial4}
+\include{rozdzial5}
+\include{rozdzial6}
 \include{tests}
 
 %Kod poniżej dodaje Bibliografię do spisu treści
