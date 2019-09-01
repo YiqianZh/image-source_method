@@ -88,12 +88,5 @@ __kernel void templateKernel(__global  uint * output,
 		Sy = Cy;
 		Sz = Cz;
     }
-    if(czy_zly == false && czy_wektor == false)
-    {
-         output[LL] = LL;
-    }
-	else
-	{
-		output[LL] = 0;
-	}
+    
 }

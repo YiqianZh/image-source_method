@@ -26,7 +26,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 int
 initializeHost(void)
 {
-	level				= 8;
+	level				= 12;
     width               = 1;
 	for(int i = 0; i<level;i++)
 		width=width*level;
@@ -67,7 +67,7 @@ initializeHost(void)
         return SDK_FAILURE;
     }
 
-    output = (cl_uint *) malloc(width * sizeof(cl_uint));
+    output = (cl_uint *) malloc(1 * sizeof(cl_uint));
     if(!output)
     {
         std::cout << "Error: Failed to allocate output memory on host\n";
@@ -236,7 +236,7 @@ initializeCL(void)
     cl_context_properties cps[3] = { CL_CONTEXT_PLATFORM, (cl_context_properties)platform, 0 };
 
     context = clCreateContextFromType(cps, 
-                                      CL_DEVICE_TYPE_GPU, 
+                                      CL_DEVICE_TYPE_CPU, 
                                       NULL, 
                                       NULL, 
                                       &status);
@@ -450,7 +450,7 @@ initializeCL(void)
     outputBuffer = clCreateBuffer(
                        context, 
                        CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
-                       sizeof(cl_uint) * width,
+                       sizeof(cl_uint) * 1,
                        output, 
                        &status);
     if(status != CL_SUCCESS) 
@@ -823,7 +823,7 @@ runCLKernels(void)
                 outputBuffer,
                 CL_TRUE,
                 0,
-                width * sizeof(cl_uint),
+                1 * sizeof(cl_uint),
                 output,
                 0,
                 NULL,
@@ -1108,7 +1108,7 @@ main(int argc, char * argv[])
 	std::cout << "Elapsed time: " << double(tend - tstart) << std::endl;
 
     // Print output array
-    print1DArray(std::string("Output"), output, width);
+    //print1DArray(std::string("Output"), output, width);
 
     // Verify output
     //verify();
