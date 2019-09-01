@@ -26,8 +26,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 int
 initializeHost(void)
 {
-    width               = 6;
-	level				= 6;
+	level				= 8;
+    width               = 1;
+	for(int i = 0; i<level;i++)
+		width=width*level;
 	walls				= 6;
     plA					= NULL;
 	plB					= NULL;
@@ -40,9 +42,7 @@ initializeHost(void)
 	pt2y				= NULL;
 	pt2z				= NULL;
 	abso				= NULL;
-	cache				= NULL;
     output              = NULL;
-    multiplier          = 2;
 
     /////////////////////////////////////////////////////////////////
     // Allocate and initialize memory used by host 
@@ -59,7 +59,7 @@ initializeHost(void)
 	pt2y  =	(cl_float *) malloc(sizeInBytes);
 	pt2z  =	(cl_float *) malloc(sizeInBytes);
 	abso   =	(cl_float *) malloc(sizeInBytes);
-	cache = (cl_uint *) malloc(level * sizeof(cl_uint));
+	
                
     if(!abso)
     {
@@ -67,10 +67,10 @@ initializeHost(void)
         return SDK_FAILURE;
     }
 
-    output = (cl_float *) malloc(sizeInBytes);
+    output = (cl_uint *) malloc(width * sizeof(cl_uint));
     if(!output)
     {
-        std::cout << "Error: Failed to allocate input memory on host\n";
+        std::cout << "Error: Failed to allocate output memory on host\n";
         return SDK_FAILURE;
     }
 
@@ -89,7 +89,7 @@ initializeHost(void)
 	cl_float idata9[] = {-h, h, h, h, h, h};
 	cl_float idata10[] = {0.71, 0.68, 0.75, 0.72, 0.54, 0.61};
 
-	for(cl_uint i = 0; i < width; i++)
+	for(cl_uint i = 0; i < walls; i++)
     {    
 		plA[i]   = 	idata0[i];
 		plB[i]   =	idata1[i];
@@ -315,7 +315,7 @@ initializeCL(void)
     /////////////////////////////////////////////////////////////////
     plABuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       plA, 
                       &status);
@@ -327,7 +327,7 @@ initializeCL(void)
 
 	plBBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       plB, 
                       &status);
@@ -338,7 +338,7 @@ initializeCL(void)
     }
 	plCBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       plC, 
                       &status);
@@ -349,7 +349,7 @@ initializeCL(void)
     }
 	plDBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       plD, 
                       &status);
@@ -360,7 +360,7 @@ initializeCL(void)
     }
 	pt1xBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       pt1x, 
                       &status);
@@ -371,7 +371,7 @@ initializeCL(void)
     }
 	pt1yBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       pt1y, 
                       &status);
@@ -382,7 +382,7 @@ initializeCL(void)
     }
 	pt1zBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       pt1z, 
                       &status);
@@ -393,7 +393,7 @@ initializeCL(void)
     }
 	pt2xBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       pt2x, 
                       &status);
@@ -404,7 +404,7 @@ initializeCL(void)
     }
 	pt2yBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       pt2y, 
                       &status);
@@ -415,7 +415,7 @@ initializeCL(void)
     }
 	pt2zBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       pt2z, 
                       &status);
@@ -426,7 +426,7 @@ initializeCL(void)
     }
 	absoBuffer = clCreateBuffer(
                       context, 
-                      CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
+                      CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_float) * walls,
                       abso, 
                       &status);
@@ -435,7 +435,7 @@ initializeCL(void)
         std::cout << "Error: clCreateBuffer (absoBuffer)\n";
         return SDK_FAILURE;
     }
-	cacheBuffer = clCreateBuffer(
+	/*cacheBuffer = clCreateBuffer(
                       context, 
                       CL_MEM_READ_WRITE | CL_MEM_USE_HOST_PTR,
                       sizeof(cl_uint) * level,
@@ -445,7 +445,7 @@ initializeCL(void)
     { 
         std::cout << "Error: clCreateBuffer (cacheBuffer)\n";
         return SDK_FAILURE;
-    }
+    }*/
 
     outputBuffer = clCreateBuffer(
                        context, 
@@ -575,7 +575,6 @@ runCLKernels(void)
     
     globalThreads[0] = width;
     localThreads[0]  = 1;
-
     if(localThreads[0] > maxWorkGroupSize ||
         localThreads[0] > maxWorkItemSizes[0])
     {
@@ -746,11 +745,12 @@ runCLKernels(void)
         return SDK_FAILURE;
     }
 
+	//cache
 	status = clSetKernelArg(
                     kernel, 
                     12, 
-                    sizeof(cl_mem), 
-                    (void *)&cacheBuffer);
+                    level*sizeof(cl_uint), 
+                    NULL);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (cache)\n";
@@ -764,7 +764,7 @@ runCLKernels(void)
                     kernel, 
                     13, 
                     sizeof(cl_uint), 
-                    (void *)&multiplier);
+                    (void *)&level);
     if(status != CL_SUCCESS) 
     { 
         std::cout << "Error: Setting kernel argument. (multiplier)\n";
@@ -816,7 +816,8 @@ runCLKernels(void)
     //////////////////////////////////////////////////////////////////// 
     // STEP 10  Enqueue readBuffer to read the output back
     //  Wait for the event and release the event
-    //////////////////////////////////////////////////////////////////// 
+    ////////////////////////////////////////////////////////////////////
+	
     status = clEnqueueReadBuffer(
                 commandQueue,
                 outputBuffer,
@@ -948,12 +949,6 @@ cleanupCL(void)
         std::cout << "Error: In clReleaseMemObject (absoBuffer)\n";
         return SDK_FAILURE; 
     }
-	status = clReleaseMemObject(cacheBuffer);
-    if(status != CL_SUCCESS)
-    {
-        std::cout << "Error: In clReleaseMemObject (cacheBuffer)\n";
-        return SDK_FAILURE; 
-    }
     status = clReleaseMemObject(outputBuffer);
     if(status != CL_SUCCESS)
     {
@@ -1042,11 +1037,6 @@ cleanupHost(void)
 	    free(abso);
 	    abso = NULL;
 	}
-	if(cache != NULL)
-	{
-	    free(cache);
-	    cache = NULL;
-	}
     if(output != NULL)
     {
         free(output);
@@ -1067,7 +1057,7 @@ cleanupHost(void)
  */
 void print1DArray(
          const std::string arrayName, 
-         const float * arrayData, 
+         const unsigned int * arrayData, 
          const unsigned int length)
 {
     cl_uint i;
@@ -1075,9 +1065,10 @@ void print1DArray(
 
     std::cout << std::endl;
     std::cout << arrayName << ":" << std::endl;
-    for(i = 0; i < numElementsToPrint; ++i)
+    for(i = 0; i < length; ++i)
     {
-        std::cout << arrayData[i] << " ";
+		if(arrayData[i] == i)
+			std::cout << arrayData[i] << " ";
     }
     std::cout << std::endl;
 
@@ -1120,7 +1111,7 @@ main(int argc, char * argv[])
     print1DArray(std::string("Output"), output, width);
 
     // Verify output
-    verify();
+    //verify();
 
     // Releases OpenCL resources 
     if(cleanupCL()!= SDK_SUCCESS)

@@ -32,7 +32,7 @@ __kernel void templateKernel(__global  float * output,
 							 __global  float * pt2y,
 							 __global  float * pt2z,
 							 __global  float * abso,
-							 __global  uint * cache,
+							 __local  uint * cache,
                              const     unsigned int level)
 {
     uint L = get_global_id(0);
@@ -46,7 +46,7 @@ __kernel void templateKernel(__global  float * output,
 	uint N = 6;
 	bool czy_zly = false;
     bool czy_wektor = false;
-	printf("-------- %d ---------\n",LL);
+	printf("--------------------- %d ---------------------\n",LL);
     for(int i = 0 ; i<level; i++)
     {
         cache[i] = L%N;
@@ -64,7 +64,6 @@ __kernel void templateKernel(__global  float * output,
 	
     for( int i = level-1 ; i>=0 ; i--)
     {
-       
         float t = -(plA[cache[i]]*Sx + plB[cache[i]]*Sy + plC[cache[i]]*Sz + plD[cache[i]])/(plA[cache[i]]*vNx + plB[cache[i]]*vNy + plC[cache[i]]*vNz);
 		
         float Cx = vNx*t + Sx;
@@ -94,6 +93,8 @@ __kernel void templateKernel(__global  float * output,
     {
          output[LL] = LL;
     }
-
-	
+	else
+	{
+		output[LL] = 0;
+	}
 }

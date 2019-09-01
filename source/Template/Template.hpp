@@ -53,7 +53,7 @@ cl_uint  *cache;
 /*
  * Output data is stored here.
  */
-cl_float *output;
+cl_uint *output;
 
 /*
  * Multiplier is stored in this variable 

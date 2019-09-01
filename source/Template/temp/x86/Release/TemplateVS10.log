@@ -1,96 +1,32 @@
-﻿Build started 2019-08-24 14:47:34.
+﻿Build started 2019-09-01 14:10:14.
      1>Project "C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\TemplateVS10.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "temp\x86\Release\Template.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../../../../include /I../../../../../include/SDKUtil /I"C:\Program Files (x86)\AMD APP SDK\3.0\/include" /nologo /W3 /WX- /O2 /Ob2 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D _CRT_SECURE_NO_WARNINGS /D "CMAKE_INTDIR=\"Release\"" /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"temp\x86\Release\\" /Fd"C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\bin/x86/Release/Template.pdb" /Gd /TP /wd4005 /wd4996 /analyze- /errorReport:prompt Template.cpp
          Template.cpp
-     1>c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(37): error C2146: syntax error : missing ';' before identifier '_Plane'
-     1>c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(37): error C2470: '_Plane' : looks like a function definition, but there is no parameter list; skipping apparent body
-     1>c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(42): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(59): error C2146: syntax error : missing ';' before identifier 'pl'
-     1>c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(59): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(59): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>Template.cpp(56): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
-     1>Template.cpp(58): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
-     1>Template.cpp(59): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(59): error C2228: left of '.A' must have class/struct/union
-     1>Template.cpp(60): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(60): error C2228: left of '.B' must have class/struct/union
-     1>Template.cpp(61): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(61): error C2228: left of '.C' must have class/struct/union
-     1>Template.cpp(62): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(62): error C2228: left of '.D' must have class/struct/union
-     1>Template.cpp(71): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
-     1>Template.cpp(72): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(72): error C2228: left of '.A' must have class/struct/union
-     1>Template.cpp(73): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(73): error C2228: left of '.B' must have class/struct/union
-     1>Template.cpp(74): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(74): error C2228: left of '.C' must have class/struct/union
-     1>Template.cpp(75): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(75): error C2228: left of '.D' must have class/struct/union
-     1>Template.cpp(85): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(85): error C2228: left of '.A' must have class/struct/union
-     1>Template.cpp(86): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(86): error C2228: left of '.B' must have class/struct/union
-     1>Template.cpp(87): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(87): error C2228: left of '.C' must have class/struct/union
-     1>Template.cpp(88): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(88): error C2228: left of '.D' must have class/struct/union
-     1>Template.cpp(97): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
-     1>Template.cpp(98): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(98): error C2228: left of '.A' must have class/struct/union
-     1>Template.cpp(99): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(99): error C2228: left of '.B' must have class/struct/union
-     1>Template.cpp(100): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(100): error C2228: left of '.C' must have class/struct/union
-     1>Template.cpp(101): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(101): error C2228: left of '.D' must have class/struct/union
-     1>Template.cpp(110): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
-     1>Template.cpp(111): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(111): error C2228: left of '.A' must have class/struct/union
-     1>Template.cpp(112): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(112): error C2228: left of '.B' must have class/struct/union
-     1>Template.cpp(113): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(113): error C2228: left of '.C' must have class/struct/union
-     1>Template.cpp(114): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(114): error C2228: left of '.D' must have class/struct/union
-     1>Template.cpp(123): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
-     1>Template.cpp(124): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(124): error C2228: left of '.A' must have class/struct/union
-     1>Template.cpp(125): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(125): error C2228: left of '.B' must have class/struct/union
-     1>Template.cpp(126): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(126): error C2228: left of '.C' must have class/struct/union
-     1>Template.cpp(127): error C2039: 'pl' : is not a member of 'Wall'
-                 c:\users\dom\desktop\praca_magisterska\image-source_method\source\template\Template.hpp(58) : see declaration of 'Wall'
-     1>Template.cpp(127): error C2228: left of '.D' must have class/struct/union
-     1>Done Building Project "C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\TemplateVS10.vcxproj" (build target(s)) -- FAILED.
+     1>Template.cpp(31): warning C4018: '<' : signed/unsigned mismatch
+     1>Template.cpp(79): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
+     1>Template.cpp(90): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
+     1>Template.cpp(90): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
+     1>Template.cpp(90): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
+     1>Template.cpp(90): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
+     1>Template.cpp(90): warning C4305: 'initializing' : truncation from 'double' to 'cl_float'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\bin\x86\Release\Template.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\..\..\..\..\lib\win32\ /LIBPATH:"C:\Program Files (x86)\AMD APP SDK\3.0\\lib\x86\\" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib OpenCL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"temp\x86\Release\Template.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\bin\x86\Release\Template.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\bin/x86/Release/Template.lib" /MACHINE:X86 /SAFESEH:NO temp\x86\Release\Template.obj  /machine:X86 
+         TemplateVS10.vcxproj -> C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\bin\x86\Release\Template.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\bin\x86\Release\Template.exe;#1" /manifest temp\x86\Release\Template.exe.intermediate.manifest
+       PostBuildEvent:
+         copy Template_Kernels.cl "C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\bin\x86\Release\Template_Kernels.cl" /Y
+         	  
+         :VCEnd
+         Liczba skopiowanych plików:         1.
+       FinalizeBuildStatus:
+         Deleting file "temp\x86\Release\Template.unsuccessfulbuild".
+         Touching "temp\x86\Release\Template.lastbuildstate".
+     1>Done Building Project "C:\Users\dom\Desktop\praca_magisterska\image-source_method\source\Template\TemplateVS10.vcxproj" (build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.25
+Time Elapsed 00:00:00.50
