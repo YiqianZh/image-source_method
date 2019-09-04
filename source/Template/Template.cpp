@@ -236,7 +236,7 @@ initializeCL(void)
     cl_context_properties cps[3] = { CL_CONTEXT_PLATFORM, (cl_context_properties)platform, 0 };
 
     context = clCreateContextFromType(cps, 
-                                      CL_DEVICE_TYPE_CPU, 
+                                      CL_DEVICE_TYPE_GPU, 
                                       NULL, 
                                       NULL, 
                                       &status);
@@ -1062,16 +1062,19 @@ void print1DArray(
 {
     cl_uint i;
     cl_uint numElementsToPrint = (256 < length) ? 256 : length;
-
+	int counter = 0;
     std::cout << std::endl;
     std::cout << arrayName << ":" << std::endl;
     for(i = 0; i < length; ++i)
     {
 		if(arrayData[i] == i)
+		{
 			std::cout << arrayData[i] << " ";
+			counter++;
+		}
     }
     std::cout << std::endl;
-
+	std::cout << length << " vs. " << counter << "  percent: " << (float)counter/length << "%"<<std::endl;
 }
 
 void verify()

@@ -1,29 +1,174 @@
 \chapter{Obliczenia testowe}\label{cha:ot}
 
-\LaTeX~jest systemem składu umożliwiającym tworzenie dowolnego typu dokumentów (w~szczególności naukowych i~technicznych) o~wysokiej jakości typograficznej (\cite{Dil00}, \cite{Lam92}). Wysoka jakość składu jest niezależna od rozmiaru dokumentu --- zaczynając od krótkich listów do bardzo grubych książek. \LaTeX~automatyzuje wiele prac związanych ze składaniem dokumentów np.: referencje, cytowania, generowanie spisów (treści, rysunków, symboli itp.) itd.
-
-\LaTeX~jest zestawem instrukcji umożliwiających autorom skład i wydruk ich prac na najwyższym poziomie typograficznym. Do formatowania dokumentu \LaTeX~stosuje \TeX{}a (wymawiamy [tech] --- greckie litery $\tau$, $\epsilon$, $\chi$). Korzystając z~systemu składu \LaTeX~mamy za zadanie przygotować jedynie tekst źródłowy, cały ciężar składania, formatowania dokumentu przejmuje na siebie system.
 
 %---------------------------------------------------------------------------
 
 \section{Wprowadzenie}\label{sec:wprowadzenie}
 
 
-Celem poniższej pracy jest zapoznanie studentów z systemem \LaTeX~w zakresie umożliwiającym im samodzielne, profesjonalne złożenie pracy dyplomowej w systemie \LaTeX.
+Poza realizacją algorytmu autor wykonuje testy napisanej aplikacji. Testy poprawności implementacji zostały wykonane na podstawie testów jednostkowych. Przy użyciu ów testów autor sprawdza poprawność przekształceń geometrycznych i transferu danych między pamięciami urządzeń. Test poprawności całego modelu wykonano wyznaczając algebraicznie siatki źródeł pozornych dla kilku początkowych rzędów dla różnych układów geometrycznych pomieszczeń i porównując je z wynikami uzyskanymi przez obliczenia przy użyciu aplikacji. Testy dla źródeł pozornych wyższych rzędów zostały wykonane dla pojedynczych punktów.
+
+W rozdziale 5.2 autor przedstawia przykładowe wykorzystanie aplikacji do analizy pola akustycznego. W tym celu przygotowane zostały geometryczne modele pomieszczeń o zróżnicowanych wymiarach i parametrach pochłaniania dźwięku, a następnie  porównane ze sobą.
+
+W celu weryfikacji jednego z założeń pracy dotyczącego wydajności aplikacji autor uruchamia program na różnych urządzeniach. Do testów wykorzystane zostały urządzenia  zróżnicowane pod względem wydajności i ilości jednostek arytmetyczno-logicznych. Autor porównuje szybkość obliczeń na danych urządzeniach dla różnych rzędów siatki źródeł pozornych. 
+
+%---------------------------------------------------------------------------
+\section{Użycie aplikacji}\label{sec:asdasd}
+
+\subsection{Obliczenia na pomieszczeniach zróżnicowanych geometrycznie}\label{sec:imstest1}
+
+Do obliczeń dla zróżnicowanych pomieszczeń zdefiniowano 3 modele geometryczne (Tabele 5.1-5.3).
+
+\begin{table}[h]
+        \centering
+        \begin{threeparttable}
+                \caption{Geometryczny model pomieszczenia 1}\label{tab:table_example}
+                \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
+                        \midrule
+                        		&	x & y & z \\
+		Wymiary pomieszczenia & 6 & 10 & 4.6 \\
+                        Źródło & 0.2 & 0.4 & 0.33 \\
+		Punkt obserwacji & 0.6 & -1.7 & 0.4 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+\begin{table}[h]
+        \centering
+        \begin{threeparttable}
+                \caption{Geometryczny model pomieszczenia 2}\label{tab:table_example}
+                \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
+                        \midrule
+                        		&	x & y & z \\
+		Wymiary pomieszczenia & 6 & 10 & 4.6 \\
+                        Źródło & -2.9 & -4.9 & -2.2 \\
+		Punkt obserwacji & -2.87 & -4.39 & -2.08 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+\begin{table}[h]
+        \centering
+        \begin{threeparttable}
+                \caption{Geometryczny model pomieszczenia 3}\label{tab:table_example}
+                \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
+                        \midrule
+                        		&	x & y & z \\
+		Wymiary pomieszczenia & 20 & 2 & 2 \\
+                        Źródło & -9 & 0.2 & 0.3 \\
+		Punkt obserwacji & 8 & -0.4 & 0.1 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+Dla danych modeli zostały wykonane wyliczenia siatek źródeł pozornych do 12 rzędu (rysunek 15-17).
+
+Siatka 1
+
+Siatka 2
+
+Siatka 3
+
+Na podstawie siatek źródeł pozornych zostały wyznaczone echogramy oraz krzywe zaniku dźwięku (rysunek 18-23).
+
+Dużo rysunków
 
 
 %---------------------------------------------------------------------------
 
-\section{Obliczenia przy użyciu metody źródeł pozornych}\label{sec:imstest}
+\subsection{Obliczenia na pomieszczeniach o różnych parametrach pochłaniania}\label{sec:imstest2}
 
-W rozdziale~\ref{cha:pierwszyDokument} przedstawiono podstawowe informacje dotyczące struktury dokumentów w \LaTeX{}u. Alvis~\cite{Alvis2011} jest językiem 
+Do obliczeń dla zróżnicowanych współczynników pochłaniania wykorzystano model geometryczny 1 z rozdziału 5.2.1. Dla danego modelu zdefiniowano 3 różne zestawy współczynników pochłaniania (Tabela 5.4).
+
+\begin{table}[h]
+        \centering
+        \begin{threeparttable}
+                \caption{Wartośći współczynników pochłaniania dźwięku dla poszczególnych powierzchni w różnych zestawach danych}\label{tab:table_example}
+                \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
+                        \toprule
+                        	powierzchnia &	zestaw 1 & zestaw 2 & zestaw 3 \\
+                       \midrule
+		góra & 0.71 & 0.21 & 0.71 \\
+                        dół & 0.78 & 0.18 & 0.78 \\
+		lewo & 0.85 & 0.25 & 0.02 \\
+                     prawo & 0.72 & 0.12 & 0.72 \\
+		przód & 0.84 & 0.24 & 0.84 \\
+                    tył & 0.61 & 0.21 & 0.01 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+Dla danych zestawów siatki źródeł pozornych stanowią te same punkty. Zróżnicowane będą jedynie poziomy poszczególnych promieni dźwiękowych dochodzących do punktu obserwacji, co można zauważyć na echogramach (rysunek 24-26).
+
+Rysunki
+
+Różne parametry pochłaniania mają wpływ na kształt i szybkość zanikania krzywej zaniku dźwięku (rysunki 27-29).
+
+Rysowando
 
 %---------------------------------------------------------------------------
 
-\section{Wydajność}\label{sec:wyd}
+%\subsection{Wizualizacja poszczególnych promieni dźwiękowych}\label{sec:imstest2}
 
-W rozdziale~\ref{cha:pierwszyDokument} przedstawiono podstawowe informacje dotyczące struktury dokumentów w \LaTeX{}u. Alvis~\cite{Alvis2011} jest językiem 
+%Podczas testów aplikacji użyteczna okazała się możliwość wizualizacji ścieżki wybranego promienia dźwiękowego. Aplikacja autora pracy umożliwia wygenerowanie skryptu jako plik wejściowy do programu GeoGebra, który umożliwia prezentację ścieżki promienia dźwiękowego dla wybranej wariacji powierzchni odbijających (rysunek).
 
+%rysunek
+
+%rysunek
+
+%---------------------------------------------------------------------------
+
+\section{Testy wydajnościowe}\label{sec:asdas2d}
+
+Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów – CPU i GPU. Do pomiarów na CPU posłużył procesor Intel Core i5-2520M (Tabela 5.5). Pomiaru przy użyciu GPU przeprowadzono na kartach Radeon R7 250X (Tabela 5.6) oraz Radeon R9 270X (Tabela 5.7).
+ 
+\begin{table}[h]
+        \centering
+        \begin{threeparttable}
+                \caption{Dane techniczne procesora Intel Core i5-2520M}\label{tab:table_example}
+                \begin{tabularx}{0.6\textwidth}{| c | X |}
+                       \midrule
+		taktowanie & 2,50 GHz \\
+                     liczba rdzeni & 2 \\
+                    liczba wątków & 4 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+\begin{table}[h]
+        \centering
+        \begin{threeparttable}
+                \caption{Dane techniczne karty graficznej Radeon R7 250x}\label{tab:table_example}
+                \begin{tabularx}{0.6\textwidth}{| c | X |}
+                       \midrule
+		taktowanie & 1000 MHz \\
+                     liczba rdzeni GPU & 512 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+\begin{table}[h]
+        \centering
+        \begin{threeparttable}
+                \caption{Dane techniczne karty graficznej Radeon R9 270x}\label{tab:table_example}
+                \begin{tabularx}{0.6\textwidth}{| c | X |}
+                       \midrule
+		taktowanie & 1030 MHz \\
+                     liczba rdzeni GPU & 2560 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+Pomiary przeprowadzono na modelu 1 z rozdziału 5.2.1 (rysunek aaaa) dla rzędów źródeł pozornych od 2 do 12. Wyniki zostały zestawione na poniższym wykresie (rysunek).
+
+Wykres wydajności
 
 
 

@@ -1,30 +1,23 @@
 \chapter{Wstęp}\label{cha:wstep}
 
-\LaTeX~jest systemem składu umożliwiającym tworzenie dowolnego typu dokumentów (w~szczególności naukowych i~technicznych) o~wysokiej jakości typograficznej (\cite{Dil00}, \cite{Lam92}). Wysoka jakość składu jest niezależna od rozmiaru dokumentu --- zaczynając od krótkich listów do bardzo grubych książek. \LaTeX~automatyzuje wiele prac związanych ze składaniem dokumentów np.: referencje, cytowania, generowanie spisów (treści, rysunków, symboli itp.) itd.
-
-\LaTeX~jest zestawem instrukcji umożliwiających autorom skład i wydruk ich prac na najwyższym poziomie typograficznym. Do formatowania dokumentu \LaTeX~stosuje \TeX{}a (wymawiamy [tech] --- greckie litery $\tau$, $\epsilon$, $\chi$). Korzystając z~systemu składu \LaTeX~mamy za zadanie przygotować jedynie tekst źródłowy, cały ciężar składania, formatowania dokumentu przejmuje na siebie system.
-
 %---------------------------------------------------------------------------
 
 \section{Wprowadzenie}\label{sec:wprowadzenie}
 
+Wiele  dziedzin z zakresu akustyki, a w szczególności akustyka pomieszczeń, wymaga analizy pola akustycznego. Zdefiniowanie przez Wallace Clement Sabine’a pojęcia czasu pogłosu i ustalenie empirycznego wzoru rozpoczęło nową erę akustyki architektonicznej i rozwój metod analizy pola akustycznego. Wzór Sabine'a [1] oraz jego kolejne przekształcenia nie uwzględniały wielu zjawisk akustycznych. Zarówno wzory empiryczne  jak i metody statystyczne wyznaczały jedynie niektóre parametry pola akustycznego i częstowprowadzałyduży błąd w odniesieniu do rzeczywistych wartości. Analityczne rozwiązanie równania falowego  jak i wykorzystanie metody elementów skończonych były zbyt kosztownelub niemożliwe. Jednymi z prostszych do implementacji metod analizy pola akustycznego były metody geometryczne. W 1948 roku L. Cremer w publikacji „Geometrische Raumakustik” [2] przedstawia geometryczną interpretację fali akustycznej. Praca ukazuje mechanizm odbicia fali od powierzchni płaskiej i stanowi wprowadzenie do geometrycznych metod analizy pola.
 
-Celem poniższej pracy jest zapoznanie studentów z systemem \LaTeX~w zakresie umożliwiającym im samodzielne, profesjonalne złożenie pracy dyplomowej w systemie \LaTeX.
+Powstałe metody numeryczne stosowane były w wielu dziedzinach analizy pól wektorowych. Rozwój technologii komputerowej doprowadził do optymalizacji i opłacalnego wykorzystania tych metod. Początkowo , ze względu na małe zapotrzebowanie na adaptacje akustyczne, metody analizy pola akustycznego nie były znacznie rozwijane. W tym czasie szybko rozwijającą się dziedziną stała się grafika komputerowa. Próby wygenerowania realistycznych obrazów przy użyciu technologii cyfrowych wymagały zamodelowania zjawiska rozchodzenia się światła. W 1968 Arhtur Appel w swojej publikacji [3] zamodelował punktowe źródłoświatła jako nieskończony zbiór półprostych, odbijających się od powierzchni płaskich pod takim samym kątem jak kąt padania.  Powyższa  metoda promieniowa (ang. Ray Tracing) zaczęła być wykorzystywana do  renderowania grafiki trójwymiarowej. Poprzez podobieństwo rozchodzenia się fali dźwiękowej do świetlnej, w publikacji "Journal of Sound and Vibration " [4] przedstawiono wykorzystanie tej metody do obliczenia czasu pogłosu pomieszczenia. Dostrzeżono opłacalność metody promieniowej i zaczęto ją modyfikować , co doprowadziło do powstania kolejnych metod geometrycznych.  Jedną z osób, które przyczyniły się do rozwoju metod geometrycznych był W. Straszewicz. W swojej pracy [5] wykorzystuje  on podstawy metody źródeł pozornych (ang. Image-Source). W 1979 J. Allen i D. Berkley zaimplementowali  metodę źródeł pozornych przy użyciu technik cyfrowych [6]. Wysokie zapotrzebowanie na grafikę komputerową, rozwój gier komputerowych i niski koszt obliczeniowy doprowadził do rozwoju powyższych metod symulacji fali. Należy jednak pamiętać, że metody geometryczne często nie uwzględniają wielu zjawisk falowych, co wymusza uzupełnianie ich o inne metody numeryczne.  
 
-\subsection{Jakiś tytuł}
-
-\subsubsection{Jakiś tytuł w subsubsection}
-
-
-\subsection{Jakiś tytuł 2}
 
 %---------------------------------------------------------------------------
 
 \section{Cel i zakres pracy}\label{sec:celizakres}
 
-W rozdziale~\ref{cha:pierwszyDokument} przedstawiono podstawowe informacje dotyczące struktury dokumentów w \LaTeX{}u. Alvis~\cite{Alvis2011} jest językiem 
+Metoda źródeł pozornych jest obecnie wykorzystywana w popularnych programach do symulacji akustycznych [7] [8]. W przypadku tych programów stanowi ona uzupełnienie innych metod i pozwala na wyznaczenie źródeł pozornych niskich rzędów. Jako niezależna metoda, przy niewydajnych obliczeniach, nie jest w stanie dokładnie odwzorować badanego środowiska akustycznego. Obliczenia przy użyciu tej metody dla źródeł pozornych wysokich rzędów są czasochłonne. Problem ten można rozwiązać zrównoleglając obliczenia przy użyciu kart graficznych. Głównym założeniem poniższej pracy jest optymalizacja czasu obliczeń dla danej metody poprzez implementację jej na platformy heterogeniczne.
 
+Pomysł  wykorzystania kart graficznych do implementacji metody źródeł pozornych pojawia się w publikacji [9], która wykorzystuje środowisko CUDA wspierające karty graficzne NVIDIA. Kolejną implementacją metody źródeł pozornych w środowisku kart graficznych jest aplikacja Wayverb [10 ], przeznaczona jedynie dla systemów typu macOS. Ze względu na ograniczenia systemowe powyższych prac, kolejnym założeniem pracy autora jest wykonanie kodu przystosowanego do popularnych środowisk. W tym celu autor wykorzystuje bibliotekę OpenCL, która umożliwia wykonanie kodu na większości platform heterogenicznych. Aplikacja została wykonana na systemy z rodziny Windows i Linux ze względu na popularność tych środowisk. Przy tych założeniach aplikacja może stanowić bazę do wykorzystania metody źródeł pozornych w innych aplikacjach.
 
+Implementacja jako dane wejściowe ma przyjmować współrzędne przestrzenne punktu źródła dźwięku i punktu odbioru, tablicę powierzchni odbijających wraz z ich współczynnikami pochłaniania dźwięku oraz rząd obliczanych źródeł pozornych. Dane wyjściowe zostaną uzyskane w postaci siatki źródeł pozornych wraz z informacją o ilości pochłoniętej podczas odbić energii dla każdego źródła pozornego. Prezentacja danych ma zostać wykonana przez interfejs graficzny w programie GeoGebra w postaci ścieżki promienia dźwiękowego dla wybranego źródła pozornego oraz siatki źródeł pozornych.
 
 
 
