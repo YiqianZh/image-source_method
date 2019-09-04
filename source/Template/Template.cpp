@@ -26,7 +26,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 int
 initializeHost(void)
 {
-	level				= 12;
+	level				= 5;
     width               = 1;
 	for(int i = 0; i<level;i++)
 		width=width*level;

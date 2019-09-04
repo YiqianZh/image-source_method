@@ -1,9 +1,83 @@
-\chapter{Lorem Ipsum}
+\chapter{Kod kernela}
+\begin{program}
+\caption{Plik Kernel.cl}
+\begin{lstlisting}
+__kernel void templateKernel(__global  uint * output,
+                             __global  float * plA,
+							 __global  float * plB,
+							 __global  float * plC,
+							 __global  float * plD,
+							 __global  float * pt1x,
+							 __global  float * pt1y,
+							 __global  float * pt1z,
+							 __global  float * pt2x,
+							 __global  float * pt2y,
+							 __global  float * pt2z,
+							 __global  float * abso,
+							 __local  uint * cache,
+                             const     unsigned int level)
+{
+    uint L = get_global_id(0);
+	uint LL = L;
+	float Sx = 0.2; // harcoded values of source and receiver positions
+	float Sy = 0.4;
+	float Sz = 0.3;
+	float Rx = 0.6;
+	float Ry = -1.7;
+	float Rz = 0.4;
+	uint N = 6;
+	bool czy_zly = false;
+    bool czy_wektor = false;
+    for(int i = 0 ; i<level; i++)
+    {
+        cache[i] = L%N;
+        L=L/N;
+		float t = -(plA[cache[i]]*Sx + plB[cache[i]]*Sy + plC[cache[i]]*Sz + plD[cache[i]])/(plA[cache[i]]*plA[cache[i]] + plB[cache[i]]*plB[cache[i]] + plC[cache[i]]*plC[cache[i]]);
+		Sx = 2*plA[cache[i]]*t+Sx;
+		Sy = 2*plB[cache[i]]*t+Sy;
+		Sz = 2*plC[cache[i]]*t+Sz;
+		
+    }
+	
+    float vNx = Rx-Sx;
+	float vNy = Ry-Sy;
+	float vNz = Rz-Sz;
+	
+    for( int i = level-1 ; i>=0 ; i--)
+    {
+        float t = -(plA[cache[i]]*Sx + plB[cache[i]]*Sy + plC[cache[i]]*Sz + plD[cache[i]])/(plA[cache[i]]*vNx + plB[cache[i]]*vNy + plC[cache[i]]*vNz);
+		
+        float Cx = vNx*t + Sx;
+		float Cy = vNy*t + Sy;
+		float Cz = vNz*t + Sz;
+        if( vNx*plA[cache[i]] + vNy*plB[cache[i]] + vNz*plC[cache[i]] < 0)
+		{
+            czy_wektor = true;
+			break;
+		}
+        float eps = 0.00001;
+        if(Cx - pt1x[cache[i]] < -eps || Cx - pt2x[cache[i]] > eps || Cy - pt1y[cache[i]] < -eps || Cy - pt2y[cache[i]] > eps || Cz - pt1z[cache[i]] < -eps || Cz - pt2z[cache[i]] > eps)
+        {
+            czy_zly = true;
+            break;
+        }
+        float t2 = -(plA[cache[i]]*vNx + plB[cache[i]]*vNy + plC[cache[i]]*vNz)/(plA[cache[i]]*plA[cache[i]] + plB[cache[i]]*plB[cache[i]] + plC[cache[i]]*plC[cache[i]]);
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce aliquet consequat sollicitudin. Nam nec eros ut dolor vulputate maximus. Vivamus quis neque sed orci cursus ornare. Proin vel elit eros. Duis efficitur mi tempus mi volutpat ullamcorper. Vestibulum consectetur dictum dui, ac suscipit eros aliquet ac. Quisque at dignissim mauris. Nulla non finibus nunc. In hac habitasse platea dictumst. Donec semper in nunc eget ultricies. Fusce varius scelerisque cursus. Vestibulum a sem lobortis, pretium nibh quis, pharetra justo.
-
-Mauris turpis nunc, dignissim ac fringilla quis, dignissim sed dui. Cras porttitor congue nulla, vitae hendrerit ligula hendrerit vel. Donec lorem lectus, tempor a feugiat et, ultrices at augue. Suspendisse ultricies massa vitae pellentesque accumsan. Phasellus sollicitudin hendrerit lorem, lobortis aliquet nibh tristique a. Etiam nec tempus enim. Aenean diam nibh, pretium tincidunt malesuada vitae, laoreet non orci. Fusce dictum feugiat eros in malesuada. Sed vel ligula nunc. Donec nec hendrerit mauris. Sed accumsan quis quam vitae interdum. Praesent nec arcu est. Donec cursus nisi vitae ligula pharetra, quis sagittis felis dignissim.
-
-Nunc a dapibus elit, nec iaculis erat. Suspendisse eleifend neque ac odio volutpat vulputate. Etiam varius odio quis leo aliquam, ac laoreet turpis vulputate. Donec rutrum pulvinar odio, vitae maximus ipsum bibendum a. Curabitur euismod erat a cursus vehicula. Aenean quis quam vulputate, consequat erat vitae, molestie felis. Morbi gravida nulla vitae leo hendrerit iaculis. Donec lobortis, quam ac ultrices aliquam, purus lectus tempus enim, et dictum nunc tortor vitae ligula. Aliquam volutpat bibendum nulla, non elementum nunc congue ut. Aenean mattis arcu in velit faucibus, vel eleifend nibh imperdiet. Etiam eget gravida nulla, quis varius sapien.
-
-Donec bibendum commodo mi, vel interdum neque mattis nec. Suspendisse potenti. In lectus elit, accumsan non purus quis, viverra eleifend ipsum. Sed vel ex sed dolor consectetur scelerisque. Praesent id leo ultrices eros ornare accumsan. Mauris pharetra justo at tortor scelerisque mattis. Quisque eu risus vitae mi tristique pulvinar eget et nisi. Praesent a nibh vitae nunc aliquet laoreet eu eu massa. Sed aliquet mollis cursus. In erat nisl, suscipit eget justo id, euismod pellentesque nulla.
+        vNx = 2*plA[cache[i]]*t2 + vNx;
+		vNy = 2*plB[cache[i]]*t2 + vNy;
+		vNz = 2*plC[cache[i]]*t2 + vNz;
+        Sx = Cx;
+		Sy = Cy;
+		Sz = Cz;
+    }
+    if(czy_zly == false && czy_wektor == false)
+    {
+        output[LL] = LL;
+    }
+	else
+	{
+		output[LL] = 0;
+	}
+}
+\end{lstlisting}
+\end{program}
