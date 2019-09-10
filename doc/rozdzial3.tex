@@ -26,10 +26,11 @@ Początkowo GPGPU były wykorzystywane do zaawansowanego generowania grafiki. D�
 
 \section{Środowisko OpenCL}\label{sec:OpenCL}
 
-OpenCL jest platformą programistyczną opracowaną w 2009 roku przez Apple Inc, a następnie utrzymywaną przez Khronos Group. Umożliwia programowanie heterogenicznych układów procesorowych w języku opartym na C99 i C++11.
+OpenCL jest platformą programistyczną opracowaną w 2009 roku przez Apple Inc, a następnie utrzymywaną przez Khronos Group. Umożliwia programowanie heterogenicznych układów procesorowych w języku opartym na C99 i C++11. Wykorzystanie OpenCL nie ogranicza się jedynie do procesorów graficznych. Jego głowną zaletą jest przenośność na większość popularnych procesorów CPU, DSP, a nawet układów FPGA. Każdy procesor z instrukcjami SSE2 może zostać wykorzystany jako urządzenie OpenCL. Standard OpenCL dostarcza interfejs programistyczny (API), biblioteki dla wielu popularnych języków programowania oraz sterowniki do urządzeń.
 
+\subsection{Platforma}\label{sec:platforma}
 
-Aplikacja pisana w OpenCL opiera się na jednostkach zwanych platformami. Każda platforma odpowiada za przygotowanie danych do obliczeń i rozdzieleniem zadań. W nowszych standardach kod platformy może być pisany w wielu popularnych językach  (m. in. Python, Matlab). Każda platforma zawiera kontekst, w którym definiowane są dane wejściowe, kolejka zadań i urządzenia do wykonywania obliczeń. Każde urządzenie zawiera jednostki obliczeniowe (ang. compute units, CU), które składają się z elementów przetwarzania (ang. processing elements, PEs)(Rys. 3.2.). 
+Aplikacja pisana w OpenCL opiera się na jednostkach zwanych platformami. Każda platforma odpowiada za przygotowanie danych do obliczeń i rozdzielenie zadań. W nowszych standardach kod platformy może być pisany w wielu popularnych językach  (m. in. Python, Matlab). Każda platforma zawiera kontekst, w którym definiowane są dane wejściowe, kolejka zadań i urządzenia do wykonywania obliczeń. Każde urządzenie zawiera jednostki obliczeniowe (ang. compute units, CU), które składają się z elementów przetwarzania (ang. processing elements, PEs)(Rys. 3.2.). 
 
 \begin{figure}[h]
         \centering
@@ -38,7 +39,9 @@ Aplikacja pisana w OpenCL opiera się na jednostkach zwanych platformami. Każda
 	\caption{Architektura programu napisanego w bibliotece OpenCL.}
 \end{figure}
 
-Elementy przetwarzania wykonują specjalnie przygotowane funkcje (tzw. kernele), definiowane według standardu OpenCL. W zależności od urządzenia (karta graficzna, procesor itp.), CU i PE reprezentują różne elementy procesora, ale odwołuje się do nich w ten sam sposób. Umożliwia to wykonywanie  kernela o jednakowej składni na różnych typach procesorów. Kernele wykonywane są według kolejki zadań i rozdzielone pomiędzy jednostki obliczeniowe mogą być wykonywane równolegle na wielu elementach przetwarzania. Każda kolejka zadań definiuje przestrzeń indeksowania, w której wykonywane są poszczególne kernele.  Instancje kernela wywołaną w obrębie jednego indeksu nazywamy wątkiem. Przestrzeń indeksów można podzielić na grupy (ang. work-group), do których należą poszczególne wątki.
+\subsection{Kontekst obliczeniowy}\label{sec:OpenC2L}
+
+Jednostki obliczeniowe i elementy przetwarzania reprezentują różne fizyczne elementy procesora w zależności od jego rodzaju. Dla procesorów CPU CU jest równoważne PE i stanowi pojedyńczy rdzeń procesora. W kartach graficznych NVIDIA CU stanowi multiprocesor strumieniowy, a PE jego rdzenie. Karty graficzne AMD definiują CU jako jednostkę SIMD (ang. Single instruction, multiple thread), a PE jako poszczególne linie jednostki SIMD. Elementy przetwarzania wykonują specjalnie przygotowane funkcje (tzw. kernele), definiowane według standardu OpenCL. Mimo że w zależności od urządzenia CU i PE reprezentują różne elementy procesora, odwołują się do nich w ten sam sposób. Umożliwia to wykonywanie  kernela o jednakowej składni na różnych typach procesorów. Kernele wykonywane są według kolejki zadań i rozdzielone pomiędzy jednostki obliczeniowe mogą być wykonywane równolegle na wielu elementach przetwarzania. Każda kolejka zadań definiuje przestrzeń indeksowania, w której wykonywane są poszczególne kernele.  Instancje kernela wywołaną w obrębie jednego indeksu nazywamy wątkiem. Przestrzeń indeksów można podzielić na grupy (ang. work-group), do których należą poszczególne wątki.
 
 
 OpenCL umożliwia dynamiczny dostęp do pamięci urządzeń. Zdefiniowane są cztery typy pamięci:
