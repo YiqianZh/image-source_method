@@ -74,7 +74,22 @@ plABuffer = clCreateBuffer(
                            &status);
 \end{lstlisting}
 \end{program}
-Kernel przechowywany jest w postaci pliku tekstowego (załącznik A). Plik ten jest wczytywany przez platformę, a następnie budowany do obiektu (Kod źr. 6.), który później będzie wywoływany przez poszczególne wątki. Kod kernela zawiera implementację metody źródeł pozornych na podstawie danych z kontekstu obliczeniowego. Ilość wszystkich wariacji powierzchni odbijających dla $N$ powierzchni i $L$ rzędu źródeł pozornych wynosi $N^L$. Przestrzeń indeksowania stanowi kolejne liczby od 1 do $N^L$. Dla każdego wątku indeks przedstawiany jest w postaci liczby w systemie liczbowym o podstawie N. Każda kolejna cyfra takiej liczby odpowiada poszczególnej płaszczyźnie, dzięki czemu dla każdego indeksu uzyskujemy unikatową wariację powierzchni odbijających.
+Kod kernela przechowywany jest w postaci oddzielnego pliku tekstowego (załącznik A). Jest on kompilowany przez bibliotekę OpenCL podczas kompilacji głównego programu. Plik ten jest wczytywany przez platformę, a następnie budowany do obiektu (Kod źr. 6.), który później będzie wywoływany przez poszczególne wątki. Kod kernela zawiera implementację algorytmu metody źródeł pozornych (Rysunek 4.1.), który na podstawie danych z kontekstu obliczeniowego wykonuje obliczenia dla jednej wariacji powierzchni odbijających. Ilość wszystkich wariacji powierzchni odbijających dla $N$ powierzchni i $L$ rzędu źródeł pozornych wynosi $N^L$. Przestrzeń indeksowania stanowi kolejne liczby od 1 do $N^L$. Dla każdego wątku indeks przedstawiany jest w postaci liczby w systemie liczbowym o podstawie N. Każda kolejna cyfra takiej liczby odpowiada poszczególnej płaszczyźnie, dzięki czemu dla każdego indeksu uzyskujemy unikatową wariację powierzchni odbijających (Rysunek 4.2.).
+
+\begin{figure}[h]
+        \centering
+                \centering
+                \includegraphics[width=12cm]{kerneldiagram}
+	\caption{Schemat blokowy algorytmu metody źródeł pozornych dla pojedyńczej wariacji powierzchni odbijających.}
+\end{figure}
+
+\begin{figure}[h]
+        \centering
+                \centering
+                \includegraphics[width=12cm]{wariacja}
+	\caption{Schemat blokowy wyznaczania j-tej wariacji powierzchni odbijających.}
+\end{figure}
+
 \begin{program}
 \caption{Budowanie obiektu kernela}
 \begin{lstlisting}
@@ -181,14 +196,14 @@ Przed kompilacją programu należy przygotować kod pod urządzenia , na jakich 
 
 Dane wyjściowe otrzymywane są w postaci pliku output.txt. Po wykonaniu obliczeń w pliku znajdują się współrzędne punktów siatki źródeł pozornych wraz z ich energią.
 
-Przy ustawieniu dyrektywy \verb|write_file| na $true$ i wybraniu kombinacji powierzchni odbijających program wygeneruje plik ze skryptem wejściowym do programu GeoGebra. Wygenerowany skrypt rysuje trójwymiarową grafikę (Rys. 4.1.), na której znajdują się powierzchnie odbijające, punkt źródła dźwięku, punkt pozornego źródła, punkt obserwacji oraz ścieżka promienia dźwiękowego.
+Przy ustawieniu dyrektywy \verb|write_file| na $true$ i wybraniu kombinacji powierzchni odbijających program wygeneruje plik ze skryptem wejściowym do programu GeoGebra. Wygenerowany skrypt rysuje trójwymiarową grafikę (Rys. 4.3.), na której znajdują się powierzchnie odbijające, punkt źródła dźwięku, punkt pozornego źródła, punkt obserwacji oraz ścieżka promienia dźwiękowego.
 \begin{figure}[h]
         \centering
                 \centering
                 \includegraphics[width=12cm]{rys10}
 	\caption{Ścieżka promienia dźwiękowego.}
 \end{figure}
-Dane z pliku output.txt mogą posłużyć do wygenerowania siatki źródeł pozornych (Rys. 4.2.).
+Dane z pliku output.txt mogą posłużyć do wygenerowania siatki źródeł pozornych (Rys. 4.4.).
 \begin{figure}[h]
         \centering
                 \centering
