@@ -39,10 +39,23 @@ Aplikacja pisana w OpenCL opiera się na jednostkach zwanych platformami. Każda
 	\caption{Architektura programu napisanego w bibliotece OpenCL.}
 \end{figure}
 
+Pojedyńcza platforma odnosi sie do poszczegolnego sterownika. Przykladowo na komputerze z procesorem Intel i karta graficzna AMD mozemy uruchomic dwie platformy, jedna dla OpenCL™ Runtimes for Intel® Processors [https://software.intel.com/en-us/articles/opencl-drivers] i druga dla wyspecjalizowanego sterownika AMD dla danej karty graficznej. Kazda platforma moze obslugiwac wiecej niz jedno urzadzenie, w szczegolnych przypadkach moze zawierac zlozone uklady kart kraficznych.
+
+\subsection{Urzadzenia OpenCL}\label{sec:OpenC21L}
+
+Standard OpenCL udostepnia 5 roznych rodzajow urzadzen:
+
+- CL_DEVICE_TYPE_CPU - 
+
 \subsection{Kontekst obliczeniowy}\label{sec:OpenC2L}
 
+
+\subsection{Jednostki obliczeniowe i elementy przetwarzania}\label{sec:OpenC3L}
+\subsection{Kernel}\label{sec:OpenC4L}
+\subsection{Przestrzen indeksowania}\label{sec:OpenC5L}
 Jednostki obliczeniowe i elementy przetwarzania reprezentują różne fizyczne elementy procesora w zależności od jego rodzaju. Dla procesorów CPU CU jest równoważne PE i stanowi pojedyńczy rdzeń procesora. W kartach graficznych NVIDIA CU stanowi multiprocesor strumieniowy, a PE jego rdzenie. Karty graficzne AMD definiują CU jako jednostkę SIMD (ang. Single instruction, multiple thread), a PE jako poszczególne linie jednostki SIMD. Elementy przetwarzania wykonują specjalnie przygotowane funkcje (tzw. kernele), definiowane według standardu OpenCL. Mimo że w zależności od urządzenia CU i PE reprezentują różne elementy procesora, odwołują się do nich w ten sam sposób. Umożliwia to wykonywanie  kernela o jednakowej składni na różnych typach procesorów. Kernele wykonywane są według kolejki zadań i rozdzielone pomiędzy jednostki obliczeniowe mogą być wykonywane równolegle na wielu elementach przetwarzania. Każda kolejka zadań definiuje przestrzeń indeksowania, w której wykonywane są poszczególne kernele.  Instancje kernela wywołaną w obrębie jednego indeksu nazywamy wątkiem. Przestrzeń indeksów można podzielić na grupy (ang. work-group), do których należą poszczególne wątki.
 
+\subsection{Dostep do pamieci}\label{sec:OpenC6L}
 
 OpenCL umożliwia dynamiczny dostęp do pamięci urządzeń. Zdefiniowane są cztery typy pamięci:
 
@@ -56,7 +69,6 @@ OpenCL umożliwia dynamiczny dostęp do pamięci urządzeń. Zdefiniowane są cz
 
 
  Przepływ danych między platformą  a urządzeniem może odbyć się poprzez operację kopiowania  lub odwzorowania z pamięci platformy do pamięci urządzenia.
-
 
 Dużym ograniczeniem wydajności obliczeń jest czas dostępu do pamięci. Pamięć o szerszym zakresie ma wolniejszy czas dostępu, dlatego najwydajniejsze obliczeniawykonują się dla niezależnych wątków działających równolegle o prywatnej pamięci.
 
