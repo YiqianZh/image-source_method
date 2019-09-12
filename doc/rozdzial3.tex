@@ -24,6 +24,54 @@ Początkowo GPGPU były wykorzystywane do zaawansowanego generowania grafiki. D�
 
 %---------------------------------------------------------------------------
 
+\section{Modele obliczeń równoległych}\label{sec:Paralellism}
+
+Obliczenia równoległe to typ obliczeń komputerowych, w których wiele instrukcji wykonywanych jest jednocześnie [Gottlieb, Allan; Almasi, George S. (1989). Highly parallel computing. Redwood City, Calif.: Benjamin/Cummings. ISBN 978-0-8053-0177-9.]. Złożone problemy często mogą być rozłożone na mniejsze zadania, które mogą być wykonywane w tym samym czasie. Daje to możliwość szybszego rozwiązywania problemów bez zwiększania częstotliwości taktowania procesora. W uproszczeniu energia wydzielana przez procesor, a w większości ciepło, wzrasta wraz z kwadratem częstotliwości taktowania. Ze względu na te fizyczne ograniczenia procesora wielordzeniowe procesory i obliczenia równoległe stały się dominującym paradygmatem architektury komputerów.
+
+Obliczenia równoległe dzielą się na cztery różne modele:
+
+- równoległość bitów
+
+- równoległość instrukcji
+
+- równoległość danych
+
+- równoległość zadań.
+
+Modele obliczeń równoległych mogą być implementowane oddzielnie, lub w połączeniu ze sobą.
+
+\subsection{Równoległość bitów}\label{sec:bitp}
+
+Równoległość na poziomie bitów jest modelem przetwarzania równoległego opartym na zwiększaniu ilości bitów w pojedyńczym słowie procesora. Zwiększenie pojemności słowa zmniejsza liczbę instrukcji, które procesor musi wykonać, aby wykonać operację na zmiennych, których rozmiary są większe niż długość słowa.
+Początkowo komputery opierały się na jednobitowych procesorach. Pierwszym nieszeregowym komputerem był 16-bitowy Whirlwind z 1951 roku. Obecnie w komputerach osobistych funkcjonuje standard 32 i 64-bitowych architektur procesorów i systemów operacyjnych. Większa szerokość słowa wymagałaby znacznie większej zewnętrznej szyny danych, co jest kosztowne do wykonania przy obecnych procesach technologicznych. 64-bitowe słowo w większości jest wystarczające do  procesowania zmiennych wykorzystywanych na komputerach osobistych. Przy złożonych obliczeniach inżynierskich duże dane przechowuje się na kilku zmiennych i przetwarza przy użyciu kilku instrukcji procesora.
+
+\subsection{Równoległość instrukcji}\label{sec:instp}
+
+Równoległość na poziomie instrukcji jest oparta na równoległym wykorzystaniu kilku jednostek wykonawczych procesora. Większość procesorów składa się z kilku jednostek arytmetyczno-logicznych ALU, odpowiadających za wykonywanie operacji arytmetycznych i logicznych przez procesor, oraz kilku jednostek zmiennoprzecinkowych FPU, odpowiadających za wykonywanie operacji arytmetycznych na liczbach zmiennoprzecinkowych. Wszystkie jednostki ALU i FPU mogą wykonywać operacje równolegle. Przykładowo, w poniższym kodzie (Kod ...), operacja z linijki 4 może być wykonana na jednostce ALU, a operacja z linijki 5 na jednostce FPU. Wykorzystując równoległość na poziomie instrukcji obie operacje mogą być wykonane przy użyciu jednej instrukcji procesora.
+
+\begin{program}
+\caption{Plik wejściowy programu}
+\begin{lstlisting}
+float a = 1.0, b = 2.0, c;
+int x = 1, y = 2, z, w;
+
+c = a + b;
+z = z * y;
+\end{lstlisting}
+\end{program}
+
+W zależności od architektury komputera, rozdzielenie operacji na jednostki wykonawcze procesora może być wykonane dynamicznie w trakcie wykonywania programu, lub statycznie na poziomie kompilacji. Dynamicznie ustawiana równoległość instrukcji wykorzystywana jest w powszechnie dostępnych procesorach CPU. Zwiększa ona szybkość wykonywania programu i odciąża programistę i kompilator od procesu rozdzielenia instrukcji. Rozmieszczenie instrukcji na etapie kompilacji wykorzystywane jest w procesorach DSP i GPU. Pozwala to optymalizację kodu przed jego wykonaniem i obliczenie dokładnego czasu w jakim program będzie się wykonywał.  
+
+\subsection{Równoległość danych}\label{sec:datap}
+
+Równoległość na poziomie danych wykorzystywana jest przy obliczeniach na dużych zbiorach danych, gdzie obliczenia dla pojedyńczych danych są od siebie niezależne. W tym modelu zbiór danych dzielony jest na mniejsze zbiory i definiowany jest zestaw zadań, które zostaną wykonane na pojedyńczego zbioru. Mniejsze zbiory danych wysyłane są do oddzielnych jednostek sterujących, które wykonują na nich równolegle zdefinowany zestaw zadań. Równoległość danych jest najwydajniejsza dla dużych zbiorów podobnych danych (np. wektory, macierze), dla prostych operacji, takich mnożenie macierzy, transformata Fouriera. Szybkość wykonywania programu opartego na tym modelu zależy od ilości jednostek sterujących, dlatego paralelizm danych często implementowany jest na procesorach graficznych, gdzie ilość tych jednostek sięga kilku tysięcy.
+
+\subsection{Równoległość zadań}\label{sec:taskp}
+
+Równoległość na poziomie zadań to model gdzie równolegle wykonywane są różne zadania na tych samych, lub różnych zbiorach danych. Najczęściej wykorzystywany jest na wielordzeniowych procesorach CPU, gdzie każdy rdzeń może wykonywać bardziej złożone operacji niż w przypadku modelu równoległości danych. Rozdzielenie zadań pomiędzy rdzenie wykonywany jest na poziomie pisania kodu aplikacji, lub obsługiwane przez system operacyjny. Większość współczesnych systemów operacyjnych wykorzystuje równoległość zadań do wykonywania procesów na oddzielnych wątkach.
+
+%---------------------------------------------------------------------------
+
 \section{Środowisko OpenCL}\label{sec:OpenCL}
 
 OpenCL jest platformą programistyczną opracowaną w 2009 roku przez Apple Inc, a następnie utrzymywaną przez Khronos Group. Umożliwia programowanie heterogenicznych układów procesorowych w języku opartym na C99 i C++11. Wykorzystanie OpenCL nie ogranicza się jedynie do procesorów graficznych. Jego głowną zaletą jest przenośność na większość popularnych procesorów CPU, DSP, a nawet układów FPGA. Każdy procesor z instrukcjami SSE2 może zostać wykorzystany jako urządzenie OpenCL. Standard OpenCL dostarcza interfejs programistyczny (API), biblioteki dla wielu popularnych języków programowania oraz sterowniki do urządzeń.
@@ -39,11 +87,11 @@ Aplikacja pisana w OpenCL opiera się na jednostkach zwanych platformami. Każda
 	\caption{Architektura programu napisanego w bibliotece OpenCL.}
 \end{figure}
 
-Pojedyńcza platforma odnosi sie do poszczegolnego sterownika. Przykladowo na komputerze z procesorem Intel i karta graficzna AMD mozemy uruchomic dwie platformy, jedna dla OpenCL™ Runtimes for Intel® Processors [https://software.intel.com/en-us/articles/opencl-drivers] i druga dla wyspecjalizowanego sterownika AMD dla danej karty graficznej. Kazda platforma moze obslugiwac wiecej niz jedno urzadzenie, w szczegolnych przypadkach moze zawierac zlozone uklady kart kraficznych.
+Pojedyńcza platforma odnosi się do poszczególnego sterownika. Przykładowo na komputerze z procesorem Intel i kartą graficzną AMD mozemy uruchomić dwie platformy, jedną dla OpenCL™ Runtimes for Intel® Processors [https://software.intel.com/en-us/articles/opencl-drivers] i drugą dla wyspecjalizowanego sterownika AMD dla danej karty graficznej. Każda platforma może obsługiwać więcej niż jedno urządzenie, w szczególnych przypadkach może zawierać złożone układy kart graficznych.
 
 \subsection{Urzadzenia OpenCL}\label{sec:OpenC21L}
 
-Standard OpenCL udostepnia 5 roznych rodzajow urzadzen:
+Standard OpenCL udostępnia 5 różnych rodzajów urządzeń:
 
 - CL_DEVICE_TYPE_CPU - 
 
