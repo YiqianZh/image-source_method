@@ -126,7 +126,7 @@ W jednym kontekście może być zdefiniowana więcej niż jedna kolejka. Takie k
 
 \subsection{Kernel}\label{sec:OpenC4L}
 
-Funkcja kernela jest kodem napisanym w języku OpenCL wykoywanym na urządzeniu OpenCL. Zdefiniowa jest poprzez kwalifikator __kernel. Język kernela oparty jest na C99 i C++11 i w zależności od wersji OpenCL może wykorzystywać niektóre funkcje biblioteczne z tych języków. Przykładowo od wersji OpenCL 1.2 w kodzie kernela możliwe jest użycie funkcji printf.
+Funkcja kernela jest kodem napisanym w języku OpenCL wykoywanym na urządzeniu OpenCL. Zdefiniowa jest poprzez kwalifikator \verb|__kernel|. Język kernela oparty jest na C99 i C++11 i w zależności od wersji OpenCL może wykorzystywać niektóre funkcje biblioteczne z tych języków. Przykładowo od wersji OpenCL 1.2 w kodzie kernela możliwe jest użycie funkcji printf.
 
 Rozróżniane są dwa typy kerneli:
 
@@ -204,12 +204,15 @@ Synchronizacja w obrębie kolejek zadań może odbywać przy użyciu dwóch mech
 
 \subsection{Obiekty pamięci}\label{sec:OpenC61asdL}
 
-Obiekty pamięci przechowują dane, które mogą być przenoszone pomiędzy pamięcią urządzenia gospodarza, a pamięcią urządzenia OpenCL. Obiekt pamięci jest obsługiwany przez typ \textbf{cl_mem} i może być przekazany jako parametr wejściowy, lub wyjściowy do funkcji kernela.
+Obiekty pamięci przechowują dane, które mogą być przenoszone pomiędzy pamięcią urządzenia gospodarza, a pamięcią urządzenia OpenCL. Obiekt pamięci jest obsługiwany przez typ \verb|cl_mem| i może być przekazany jako parametr wejściowy, lub wyjściowy do funkcji kernela.
 
 Standard definiuje dwa typy obiektów pamięci: bufor (ang. buffer object) i obraz (ang. image object). Obiekt bufora przechowuje jednowymiarowy zbiór elementów, natomiast obiekt obrazu może przechowywać dwu-, lub trójwymiarowy zbiór elementów, lub zbiór buforów. Podstawową różnicą między typami poza wymiarem jest ułożenie danych w pamięci. Elementy w buforze są ułożone w ciągłej pamięci i możemy się odwoływać do nich poprzez wskaźnik. Rozmieszczenie elementów obrazu nie jest widoczne dla użytkownika, a dostęp do nich odbywa się poprzez funkcje wbudowane w język OpenCL C. Elementami bufora mogą być dowolne typy danych obsługiwane przez język kernela, natomiast elementy obrazu stanowią czteroelementowe wektory liczb całkowitych, lub zmiennoprzecinkowych. Stanowi to wygodny format do przechowywania plików graficznych. W przypadku przekazywania innego typu danych jako obraz, w funkcji kernela należy wykonać odpowiednią konwersję i interpretację danych.
 
+%---------------------------------------------------------------------------
 
+\section{Inne środowiska programowania heterogenicznego}\label{sec:others}
 
+\subsection{CUDA}\label{sec:cuda}
 
 
 
