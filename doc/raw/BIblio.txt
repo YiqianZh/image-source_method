@@ -8,13 +8,16 @@
 8 - 7 z in¿
 9 - Z.-h. Fu and J.-w. Li, “GPU-based image method for room impulse response calculation,” Multimedia Tools and Applications, pp. 1–17, 2016.
 10 Wayverb
-11 - 7 z in¿
-12 - 8 z in¿
-13 - 9 z in¿
-14 - 10 z in¿
+11 - 9 z in¿
+12 - 10 z in¿
+13 - 11 z in¿
+14 - 12 z in¿
 15 - artykul o hybrydowych metodach
 Architekura von Neumana [16] 
 Architektura Harwardzka [17]
 18 Rost, Randi J. OpenGL Shading Language. Addison-Wesley Professional. ISBN 0-321-19789-5.
 19 albo 3 Appel A. (1968) Some techniques for shading machine renderings of solids. AFIPS Conference Proc. 32 pp.37-45
+20  [Gottlieb, Allan; Almasi, George S. (1989). Highly parallel computing. Redwood City, Calif.: Benjamin/Cummings. ISBN 978-0-8053-0177-9.
+21 OpenCL doc
+22 [https://software.intel.com/en-us/articles/opencl-drivers]
 20 Josh Lerner, Mark Schankerman: The Comingled Code: Open Source and Economic Development. Cambridge, MA: MIT Press, 2010. ISBN 978-0-262-01463-2.

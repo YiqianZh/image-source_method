@@ -1,0 +1,11 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {polish}{}
+\babel@toc {english}{}
+\babel@toc {polish}{}
+\contentsline {chapter}{\numberline {1}Wst\IeC {\k e}p}{10}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Wprowadzenie}{10}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Cel i zakres pracy}{11}{section.1.2}% 
+\contentsline {chapter}{Bibliografia}{12}{section*.1}% 
+\contentsline {chapter}{Za\IeC {\l }\IeC {\k a}czniki}{12}{section*.2}% 
+\let \l@chapter \l@section 
+\contentsline {chapter}{\numberline {A}Kod kernela}{13}{Dodatek.a.A}% 
