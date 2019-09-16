@@ -5,10 +5,10 @@
 \section{Wprowadzenie}\label{sec:wprowadzenie}
 
 
-Promowany w latach 80-tych ruch wolnego oprogramowania~\cite{b23} znacząco wpłynął na rozwój aplikacji i algorytmów. Powszechny dostęp do Internetu umożliwił upublicznianie kodów źródłowych, co zrzeszało duże społeczności pracujące wspólnie nad rozwojem programów komputerowych. Otwarte bazy aplikacji i algorytmów pozwoliły niezależnym programistom  na wykorzystanie ich do rozwoju kolejnych w wydajniejszy sposób. Realizacja projektu niniejszej pracy stanowi bazę, która może zostać wykorzystana w podobny sposób. Kod tej aplikacji może zostać łatwo zaadaptowany do połączenia jej z innym oprogramowaniem. Możliwe też jest wprowadzenie modyfikacji algorytmu metody źródeł pozornych  lub zaimplementowanie dodatkowych metod wewnątrz aplikacji.
+Promowany w~latach 80-tych ruch wolnego oprogramowania~\cite{b23} znacząco wpłynął na rozwój aplikacji i~algorytmów. Powszechny dostęp do Internetu umożliwił upublicznianie kodów źródłowych, co zrzeszało duże społeczności pracujące wspólnie nad rozwojem programów komputerowych. Otwarte bazy aplikacji i~algorytmów pozwoliły niezależnym programistom  na wykorzystanie ich do rozwoju kolejnych w~wydajniejszy sposób. Realizacja projektu niniejszej pracy stanowi bazę, która może zostać wykorzystana w~podobny sposób. Kod tej aplikacji może zostać łatwo zaadaptowany do połączenia jej z innym oprogramowaniem. Możliwe też jest wprowadzenie modyfikacji algorytmu metody źródeł pozornych  lub zaimplementowanie dodatkowych metod wewnątrz aplikacji.
 
 
-Aplikacja została napisana przy użyciu OpenCL w wersji 1.2. Zdecydowano się na starszą wersję ze względu na kompatybilność z wieloma popularnymi urządzeniami. Platforma została napisana przy użyciu języka C++11. Zarówno dane wejściowe jak i wyjściowe transferowane są między plikiem wykonywalnym a plikami tekstowymi.    
+Aplikacja została napisana przy użyciu OpenCL w~wersji 1.2. Zdecydowano się na starszą wersję ze względu na kompatybilność z wieloma popularnymi urządzeniami. Platforma została napisana przy użyciu języka C++11. Zarówno dane wejściowe jak i~wyjściowe transferowane są między plikiem wykonywalnym a~plikami tekstowymi.    
 
 
 
@@ -16,7 +16,7 @@ Aplikacja została napisana przy użyciu OpenCL w wersji 1.2. Zdecydowano się n
 
 \section{Implementacja algorytmu}\label{sec:ra}
 
-Aplikacja do obliczeń używa jednej platformy (Kod źr. 1.), która definiuje jeden kontekst obliczeniowy i jedno urządzenie.
+Aplikacja do obliczeń używa jednej platformy (Kod źr. 1.), która definiuje jeden kontekst obliczeniowy i~jedno urządzenie.
 \begin{program}
 \caption{Definiowanie platformy}
 \begin{lstlisting}
@@ -24,7 +24,7 @@ cl_platform_id* platforms = new cl_platform_id[numPlatforms];
 status = clGetPlatformIDs(numPlatforms, platforms, NULL);
 \end{lstlisting}
 \end{program}
-Dane wejściowe alokowane są w pamięci po stronie platformy. Następnie tworzony jest kontekst obliczeniowy (Kod źr. 2.), który przy użyciu predyrektywy \verb|CL_PRESENT_DEVICE| wybiera , jaki typ urządzenia zostanie wybrany.
+Dane wejściowe alokowane są w~pamięci po stronie platformy. Następnie tworzony jest kontekst obliczeniowy (Kod źr. 2.), który przy użyciu predyrektywy \verb|CL_PRESENT_DEVICE| wybiera , jaki typ urządzenia zostanie wybrany.
 \begin{program}
 \caption{Definiowanie kontekstu obliczeniowego}
 \begin{lstlisting}
@@ -37,7 +37,7 @@ context = clCreateContextFromType(
                                   &status);
 \end{lstlisting}
 \end{program}
-Następuje poszukiwanie urządzenia o zadanym typie i zapisanie informacji o nim (Kod źr. 3.).
+Następuje poszukiwanie urządzenia o zadanym typie i~zapisanie informacji o nim (Kod źr. 3.).
 \begin{program}
 \caption{Pobieranie listy dostępnych urządzeń}
 \begin{lstlisting}
@@ -61,7 +61,7 @@ commandQueue = clCreateCommandQueue(
                                     &status);
 \end{lstlisting}
 \end{program}
-Dane wejściowe przekazywane są do kontekstu obliczeniowego poprzez bufory (Kod źr. 5.). Oddzielne bufory dla każdej danej wejściowej transferują owe  dane do zdefiniowanego przez kernel miejsca w pamięci. 
+Dane wejściowe przekazywane są do kontekstu obliczeniowego poprzez bufory (Kod źr. 5.). Oddzielne bufory dla każdej danej wejściowej transferują owe  dane do zdefiniowanego przez kernel miejsca w~pamięci. 
 \begin{program}
 \caption{Definicja buforu danych dla parametru plA}
 \begin{lstlisting}
@@ -74,7 +74,7 @@ plABuffer = clCreateBuffer(
                            &status);
 \end{lstlisting}
 \end{program}
-Kod kernela przechowywany jest w postaci oddzielnego pliku tekstowego (załącznik A). Jest on kompilowany przez bibliotekę OpenCL podczas wykonywania głównego programu. Plik ten jest wczytywany przez platformę, a następnie budowany do obiektu (Kod źr. 6.), który później będzie wywoływany przez poszczególne wątki. Kod kernela zawiera implementację algorytmu metody źródeł pozornych (Rysunek 4.1.), który na podstawie danych z kontekstu obliczeniowego wykonuje obliczenia dla jednej wariacji powierzchni odbijających. Ilość wszystkich wariacji powierzchni odbijających dla $N$ powierzchni i $L$ rzędu źródeł pozornych wynosi $N^L$. Przestrzeń indeksowania stanowi kolejne liczby od 1 do $N^L$. Dla każdego wątku indeks przedstawiany jest w postaci liczby w systemie liczbowym o podstawie N. Każda kolejna cyfra takiej liczby odpowiada poszczególnej płaszczyźnie, dzięki czemu dla każdego indeksu uzyskujemy unikatową wariację powierzchni odbijających (Rysunek 4.2.).
+Kod kernela przechowywany jest w~postaci oddzielnego pliku tekstowego (załącznik A). Jest on kompilowany przez bibliotekę OpenCL podczas wykonywania głównego programu. Plik ten jest wczytywany przez platformę, a~następnie budowany do obiektu (Kod źr. 6.), który później będzie wywoływany przez poszczególne wątki. Kod kernela zawiera implementację algorytmu metody źródeł pozornych (Rysunek 4.1.), który na podstawie danych z kontekstu obliczeniowego wykonuje obliczenia dla jednej wariacji powierzchni odbijających. Ilość wszystkich wariacji powierzchni odbijających dla $N$ powierzchni i~$L$ rzędu źródeł pozornych wynosi $N^L$. Przestrzeń indeksowania stanowi kolejne liczby od 1 do $N^L$. Dla każdego wątku indeks przedstawiany jest w~postaci liczby w~systemie liczbowym o podstawie N. Każda kolejna cyfra takiej liczby odpowiada poszczególnej płaszczyźnie, dzięki czemu dla każdego indeksu uzyskujemy unikatową wariację powierzchni odbijających (Rysunek 4.2.).
 
 \begin{figure}[h]
         \centering
@@ -103,7 +103,7 @@ status = clBuildProgram(program, 1, devices, NULL, NULL, NULL);
 kernel = clCreateKernel(program, "templateKernel", &status);
 \end{lstlisting}
 \end{program}
-W zależności od wykorzystywanego urządzenia należy dobrać odpowiednio wielkości grup wątków. Zostały one zdefiniowane w zmiennych globalThreads i localThreads. Należy zwrócić uwagę, aby nie przekraczały one maksymalnych dopuszczalnych wartości dla danego urządzenia. W tym celu pobierane są informacje z bieżącego urządzenia o maksymalnych dopuszczalnych wartościach (Kod źr. 7.).
+W zależności od wykorzystywanego urządzenia należy dobrać odpowiednio wielkości grup wątków. Zostały one zdefiniowane w~zmiennych globalThreads i~localThreads. Należy zwrócić uwagę, aby nie przekraczały one maksymalnych dopuszczalnych wartości dla danego urządzenia. W tym celu pobierane są informacje z bieżącego urządzenia o maksymalnych dopuszczalnych wartościach (Kod źr. 7.).
 \begin{program}
 \caption{Pobranie informacji o zasobach urządzenia}
 \begin{lstlisting}
@@ -139,7 +139,7 @@ clSetKernelArg(
                (void *)&plABuffer);
 \end{lstlisting}
 \end{program}
-Następuje uruchomienie kolejki zadań i czekanie na ich wykonanie (Kod źr. 9.). Po wykonaniu zadań kolejka zostaje zwolniona.
+Następuje uruchomienie kolejki zadań i~czekanie na ich wykonanie (Kod źr. 9.). Po wykonaniu zadań kolejka zostaje zwolniona.
 \begin{program}
 \caption{Uruchomienie kolejki zadań dla bufora wejściowego}
 \begin{lstlisting}
@@ -179,7 +179,7 @@ clEnqueueReadBuffer(
 
 \section{Obsługa aplikacji}\label{sec:oa}
 
-Przed kompilacją programu należy przygotować kod pod urządzenia, na jakich  będzie on wykonywany. W zależności od typu procesora należy zdefiniować dyrektywę \verb|CL_PRESENT_DEVICE| jako \verb|CL_DEVICE_TYPE_CPU| dla procesorów, lub \verb|CL_DEVICE_TYPE_GPU| dla kart graficznych. W zależności od parametrów urządzenia należy odpowiednio zdefiniować rozmiary grup wątków w zmiennych localThreads i globalThreads, a następne skompilować do pliku wykonywalnego dołączając biblioteki standardu OpenCL. Plik wykonywalny przyjmuje dane w postaci pliku wejściowego o nazwie input.txt. W danym pliku należy zdefiniować w kolejnych liniach  rząd pozornych źródeł, współrzędne punktu źródła dźwięku i punktu obserwacji, współczynniki płaszczyzn powierzchni odbijających w postaci ogólnej, granice powierzchni dla poszczególnych osi oraz współczynniki pochłaniania dźwięku dla każdej powierzchni (Kod źr. 11).
+Przed kompilacją programu należy przygotować kod pod urządzenia, na jakich  będzie on wykonywany. W zależności od typu procesora należy zdefiniować dyrektywę \verb|CL_PRESENT_DEVICE| jako \verb|CL_DEVICE_TYPE_CPU| dla procesorów, lub \verb|CL_DEVICE_TYPE_GPU| dla kart graficznych. W zależności od parametrów urządzenia należy odpowiednio zdefiniować rozmiary grup wątków w~zmiennych localThreads i~globalThreads, a~następne skompilować do pliku wykonywalnego dołączając biblioteki standardu OpenCL. Plik wykonywalny przyjmuje dane w~postaci pliku wejściowego o nazwie input.txt. W danym pliku należy zdefiniować w~kolejnych liniach  rząd pozornych źródeł, współrzędne punktu źródła dźwięku i~punktu obserwacji, współczynniki płaszczyzn powierzchni odbijających w~postaci ogólnej, granice powierzchni dla poszczególnych osi oraz współczynniki pochłaniania dźwięku dla każdej powierzchni (Kod źr. 11).
 
 \begin{program}
 \caption{Plik wejściowy programu}
@@ -188,15 +188,15 @@ Przed kompilacją programu należy przygotować kod pod urządzenia, na jakich  
 0.2, 0.4, 0.3  % współrzędne punktu źródła
 0.6, -1.7, 0.4 % współrzędne punktu obserwacji
 0, 0, 1, 3.3   % współczynniki płaszczyzny dla pierwszej powierzchni odbijającej 
--2, -7, -3.3   % dolne granice powierzchni dla osi x, y i z 
-2, 7, -3.3     % gorne granice powierzchni dla osi x, y i z
+-2, -7, -3.3   % dolne granice powierzchni dla osi x, y i~z 
+2, 7, -3.3     % gorne granice powierzchni dla osi x, y i~z
 0.71           % współczynnik pochłaniania powierzchni
 \end{lstlisting}
 \end{program}
 
-Dane wyjściowe otrzymywane są w postaci pliku output.txt. Po wykonaniu obliczeń w pliku znajdują się współrzędne punktów siatki źródeł pozornych wraz z ich energią.
+Dane wyjściowe otrzymywane są w~postaci pliku output.txt. Po wykonaniu obliczeń w~pliku znajdują się współrzędne punktów siatki źródeł pozornych wraz z ich energią.
 
-Przy ustawieniu dyrektywy \verb|write_file| na $true$ i wybraniu kombinacji powierzchni odbijających program wygeneruje plik ze skryptem wejściowym do programu GeoGebra. Wygenerowany skrypt rysuje trójwymiarową grafikę (Rys. 4.3.), na której znajdują się powierzchnie odbijające, punkt źródła dźwięku, punkt pozornego źródła, punkt obserwacji oraz ścieżka promienia dźwiękowego.
+Przy ustawieniu dyrektywy \verb|write_file| na $true$ i~wybraniu kombinacji powierzchni odbijających program wygeneruje plik ze skryptem wejściowym do programu GeoGebra. Wygenerowany skrypt rysuje trójwymiarową grafikę (Rys. 4.3.), na której znajdują się powierzchnie odbijające, punkt źródła dźwięku, punkt pozornego źródła, punkt obserwacji oraz ścieżka promienia dźwiękowego.
 \begin{figure}[h]
         \centering
                 \centering

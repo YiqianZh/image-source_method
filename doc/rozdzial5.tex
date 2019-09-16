@@ -6,11 +6,11 @@
 \section{Wprowadzenie}\label{sec:wprowadzenie}
 
 
-Poza realizacją algorytmu autor wykonuje testy napisanej aplikacji. Testy poprawności implementacji zostały wykonane na podstawie testów jednostkowych. Przy użyciu ów testów autor sprawdza poprawność przekształceń geometrycznych i transferu danych między pamięciami urządzeń. Test poprawności całego modelu wykonano wyznaczając algebraicznie siatki źródeł pozornych dla kilku początkowych rzędów dla różnych układów geometrycznych pomieszczeń i porównując je z wynikami uzyskanymi przez obliczenia przy użyciu aplikacji. Testy dla źródeł pozornych wyższych rzędów zostały wykonane dla pojedynczych punktów.
+Poza realizacją algorytmu autor wykonuje testy napisanej aplikacji. Testy poprawności implementacji zostały wykonane na podstawie testów jednostkowych. Przy użyciu ów testów autor sprawdza poprawność przekształceń geometrycznych i~transferu danych między pamięciami urządzeń. Test poprawności całego modelu wykonano wyznaczając algebraicznie siatki źródeł pozornych dla kilku początkowych rzędów dla różnych układów geometrycznych pomieszczeń i~porównując je z wynikami uzyskanymi przez obliczenia przy użyciu aplikacji. Testy dla źródeł pozornych wyższych rzędów zostały wykonane dla pojedynczych punktów.
 
-W rozdziale 5.2 autor przedstawia przykładowe wykorzystanie aplikacji do analizy pola akustycznego. W tym celu przygotowane zostały geometryczne modele pomieszczeń o zróżnicowanych wymiarach i parametrach pochłaniania dźwięku, a następnie  porównane ze sobą.
+W rozdziale 5.2 autor przedstawia przykładowe wykorzystanie aplikacji do analizy pola akustycznego. W tym celu przygotowane zostały geometryczne modele pomieszczeń o zróżnicowanych wymiarach i~parametrach pochłaniania dźwięku, a~następnie  porównane ze sobą.
 
-W celu weryfikacji jednego z założeń pracy dotyczącego wydajności aplikacji autor uruchamia program na różnych urządzeniach. Do testów wykorzystane zostały urządzenia  zróżnicowane pod względem wydajności i ilości jednostek arytmetyczno-logicznych. Autor porównuje szybkość obliczeń na danych urządzeniach dla różnych rzędów siatki źródeł pozornych. 
+W celu weryfikacji jednego z założeń pracy dotyczącego wydajności aplikacji autor uruchamia program na różnych urządzeniach. Do testów wykorzystane zostały urządzenia  zróżnicowane pod względem wydajności i~ilości jednostek arytmetyczno-logicznych. Autor porównuje szybkość obliczeń na danych urządzeniach dla różnych rzędów siatki źródeł pozornych. 
 
 %---------------------------------------------------------------------------
 \section{Użycie aplikacji}\label{sec:asdasd}
@@ -141,7 +141,7 @@ Do obliczeń dla zróżnicowanych współczynników pochłaniania wykorzystano m
 \begin{table}[h]
         \centering
         \begin{threeparttable}
-                \caption{Wartośći współczynników pochłaniania dźwięku dla poszczególnych powierzchni w różnych zestawach danych}\label{tab:table_example}
+                \caption{Wartośći współczynników pochłaniania dźwięku dla poszczególnych powierzchni w~różnych zestawach danych}\label{tab:table_example}
                 \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
                         \toprule
                         	powierzchnia &	zestaw 1 & zestaw 2 & zestaw 3 \\
@@ -180,7 +180,7 @@ Dla danych zestawów siatki źródeł pozornych stanowią te same punkty. Zróż
 	\caption{Echogram modelu 3.}
 \end{figure}
 
-Różne parametry pochłaniania mają wpływ na kształt i szybkość zanikania krzywej zaniku dźwięku (Rys. 5.13-5.15).
+Różne parametry pochłaniania mają wpływ na kształt i~szybkość zanikania krzywej zaniku dźwięku (Rys. 5.13-5.15).
 
 \begin{figure}[h]
         \centering
@@ -220,24 +220,24 @@ Podczas testów aplikacji użyteczna okazała się możliwość wizualizacji śc
         \centering
                 \centering
                 \includegraphics[width=12cm]{odbiciaz}
-	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w rzucie na płaszczyznę XY.}
+	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę XY.}
 \end{figure}
 
 \begin{figure}[h]
         \centering
                 \centering
                 \includegraphics[width=12cm]{odbiciay}
-	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w rzucie na płaszczyznę XZ.}
+	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę XZ.}
 \end{figure}
 
 \begin{figure}[h]
         \centering
                 \centering
                 \includegraphics[width=12cm]{odbiciax}
-	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w rzucie na płaszczyznę YZ.}
+	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę YZ.}
 \end{figure}
 
-Wizualizacja ścieżek promieni dźwiękowych może być przydatna w akustyce architektonicznej przy projektowaniu rozmieszczenia ustrojów akustycznych. Rysując promienie dźwiękowe dla pierwszych odbić (Rysunek 5.20.) możemy wyznaczyć punkty, w których dane odbicia zachodzą. Umieszczając materiał o innych właściwościach pochłaniania w miejscach pierwszych odbić możemy wpłynąć na ilość energii jaka przychodzi do odbiornika w pierwszych milisekundach, co pozwala bezpośrednio wpłynąć na wskaźniki C50, C80, D50 oraz wskaźnik zrozumiałości mowy.
+Wizualizacja ścieżek promieni dźwiękowych może być przydatna w~akustyce architektonicznej przy projektowaniu rozmieszczenia ustrojów akustycznych. Rysując promienie dźwiękowe dla pierwszych odbić (Rysunek 5.20.) możemy wyznaczyć punkty, w~których dane odbicia zachodzą. Umieszczając materiał o innych właściwościach pochłaniania w~miejscach pierwszych odbić możemy wpłynąć na ilość energii jaka przychodzi do odbiornika w~pierwszych milisekundach, co pozwala bezpośrednio wpłynąć na wskaźniki C50, C80, D50 oraz wskaźnik zrozumiałości mowy.
 
 \begin{figure}[h]
         \centering
@@ -253,7 +253,7 @@ Wizualizacja ścieżek promieni dźwiękowych może być przydatna w akustyce ar
 	\caption{Ścieżki promieni dźwiękowych dla pierwszych odbić wraz z rozmieszczeniem materiałów pochłaniających.}
 \end{figure}
 
-Dla tak przygotowanych modeli możemy wyznaczyć echogramy (Rysunek 5.21 - 5.22.) i ilość energii, która dochodzi do punktu obserwacji. Pozwala to na dostrojenie modelu do wybranych założeń projektowych, jakimi mogą być wartości wcześniej wymienionych wskaźników.
+Dla tak przygotowanych modeli możemy wyznaczyć echogramy (Rysunek 5.21 - 5.22.) i~ilość energii, która dochodzi do punktu obserwacji. Pozwala to na dostrojenie modelu do wybranych założeń projektowych, jakimi mogą być wartości wcześniej wymienionych wskaźników.
 
 \begin{figure}[h]
         \centering
@@ -273,7 +273,7 @@ Dla tak przygotowanych modeli możemy wyznaczyć echogramy (Rysunek 5.21 - 5.22.
 
 \section{Testy wydajnościowe}\label{sec:asdas2d}
 
-Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów – CPU i GPU. Do pomiarów na CPU posłużył procesor Intel Core i5-2520M (Tabela 5.5). Pomiaru przy użyciu GPU przeprowadzono na kartach Radeon R7 250X (Tabela 5.6) oraz Radeon R9 270X (Tabela 5.7).
+Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów – CPU i~GPU. Do pomiarów na CPU posłużył procesor Intel Core i5-2520M (Tabela 5.5). Pomiaru przy użyciu GPU przeprowadzono na kartach Radeon R7 250X (Tabela 5.6) oraz Radeon R9 270X (Tabela 5.7).
  
 \begin{table}[h]
         \centering
@@ -324,7 +324,7 @@ Pomiary przeprowadzono na modelu 1 z rozdziału 5.2.1 (Rys. 5.1.) dla rzędów �
 	\caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla różnych urządzeń.}
 \end{figure}
 
-W celu sprawdzenia wydajności implementacji algorytmu w środowisku OpenCL autor porównał czas obliczeń algorytmu w tym środowisku z czasem obliczeń algorytmu zaimplementowanego przy użyciu czystego kodu C++, bez użycia wielowątkowości (Rys. 5.14).
+W celu sprawdzenia wydajności implementacji algorytmu w~środowisku OpenCL autor porównał czas obliczeń algorytmu w~tym środowisku z czasem obliczeń algorytmu zaimplementowanego przy użyciu czystego kodu C++, bez użycia wielowątkowości (Rys. 5.14).
 
 \begin{figure}[h]
         \centering
@@ -333,7 +333,11 @@ W celu sprawdzenia wydajności implementacji algorytmu w środowisku OpenCL auto
 	\caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla różnych urządzeń.}
 \end{figure}
 
+%---------------------------------------------------------------------------
 
+\section{Błąd obliczeń}\label{sec:asdas2sd}
+
+Większa część algorytmu metody źródeł pozornych odpowiada za sprawdzenie czy dany promień dźwiękowy istnieje w~danym modelu geometrycznym. Sprawdzenie odpowiada jedynie za decyzję czy dany promień będzie uwzględniany w~siatce źródeł pozornych i~nie wpływa na błąd wyniku końcowego. Błąd obliczonych pozycji siatki źródeł pozornych powstaje w~wyniku narastania błędu zaokrąglenia podczas operacji arytmetycznych związanych z wyznaczaniem kolejnych odbić lustrzanych punktu źródła. Do obliczenia współrzędnej odbicia należy wykonać 4 mnożenia co czterokrotnie zwiększa wartość błędu względnego $\Epsilon$. Dla współrzędnych zapisanych w~zmiennych typu float daje to błąd względny równy |$\delta$| = 2 E-21. Dla źródeł pozornych N-tego rzędu wartość tego błędu wzrasta o N razy. Nawet dla źródeł pozornych 16-tego rzędu błąd wynosi |$\delta$| = 2 E-17. W akustyce architektonicznej błędy danych wejściowych są o kilkanaście rzędów wielkości większe od tego błędu przez co może on zostać pominięty w~obliczeniach.
 
 
 
