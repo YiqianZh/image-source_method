@@ -260,9 +260,9 @@ W zależności szerokości bitowej danego typu liczba zmiennoprzecinkowa ma ró�
         \centering
         \begin{threeparttable}
                 \caption{Typy danych w~standardzie IEEE 754.}\label{tab:table_exampleaz}
-                \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
+                \begin{tabularx}{0.6\textwidth}{| c | c | c | c |}
                         \midrule
-                        	precyzja	&	szerokość & mantysa & wykładnik \\
+                        	precyzja	&	szerokosc & mantysa & wykladnik \\
 		pojedyncza  & 32 bitów & 23 bity & 8 bitów \\
                         podwójna  & 64 bity & 52 bity & 11 bitów \\
 		rozszerzona & 80 bitów & 64 bity & 15 bitów \\
@@ -277,12 +277,12 @@ Zakres danych możliwy do zapisania na poszczególnych typach obrazuje Tabela 3.
         \centering
         \begin{threeparttable}
                 \caption{Przybliżone wartości minimalne i~maksymalne dodatnich liczb zmiennoprzecinkowych standardu IEEE 754.}\label{tab:table_exampleazd}
-                \begin{tabularx}{0.6\textwidth}{| c | X | X |}
+                \begin{tabularx}{0.6\textwidth}{| c | c | c |}
                         \midrule
-                        	precyzja	&	wartość minimalna & wartość maksymalna \\
+                        	precyzja	&	w. min. & w. maks. \\
 		pojedyncza  & 1,18 E-38 & 3,40 E+38 \\
                         podwójna  & 2,23 E-308 & 1,90 E+308 \\
-		rozszerzona &  3,65 E−4951 & 1,18 E+104932 \\
+		rozszerzona &  3,65 E-4951 & 1,18 E+104932 \\
                         \bottomrule
                 \end{tabularx}
         \end{threeparttable}
@@ -300,15 +300,15 @@ W standardzie IEEE 754 zostały zdefiniowane następujące metody zaokrąglania 
 
 Standard wykorzystuje zaokrąglanie do najbliższej wartośc jako domyślną metodę. W zależności od typu, zaokrąglenie może dać różny wynik. W zależności od procesora lub kompilatora operacje arytmetyczne mogą być wykonywane przy użyciu różnych funkcji procesora, które operują na różnych typach danych. Mimo obliczeń na jednolitym typie danych, wynik może się różnić w~zależności od platformy sprzętowej.
 
-Błąd zaokrąglenia na maszynie cyfrowej zdefiniowany jest przy użyciu dokładnści maszynowej $\Epsilon$. Dokładność maszynowa to różnica pomiędzy 1 a~najbliższą jej wartością większą od niej. Zaokrąglenie liczby rzeczywistej do zmiennoprzecinkowej następuje z błędem względnym $\Epsilon$\2. Wartości błędu względnego dla poszczególnych typów danych przedstawia Tabela 3.3. 
+Błąd zaokrąglenia na maszynie cyfrowej zdefiniowany jest przy użyciu dokładnści maszynowej $\epsilon$. Dokładność maszynowa to różnica pomiędzy 1 a~najbliższą jej wartością większą od niej. Zaokrąglenie liczby rzeczywistej do zmiennoprzecinkowej następuje z błędem względnym $\frac{\epsilon}{2}$. Wartości błędu względnego dla poszczególnych typów danych przedstawia Tabela 3.3. 
 
 \begin{table}[h]
         \centering
         \begin{threeparttable}
-                \caption{Wartości błędu względnego zaokrąglenia dla liczb zmiennoprzecinkowych standardu IEEE 754.}\label{tab:table_exampleazd}
-                \begin{tabularx}{0.6\textwidth}{| c | X |}
+                \caption{Wartości błędu względnego $\epsilon$ zaokrąglenia dla liczb zmiennoprzecinkowych standardu IEEE 754.}\label{tab:table_exampleazd}
+                \begin{tabularx}{0.6\textwidth}{| c | c |}
                         \midrule
-                        	precyzja	&	błąd względny $\Epsilon$ \\
+                        	precyzja	& $\epsilon$  \\
 		pojedyncza  &  2 E-23\\
                         podwójna  &  2 E-52\\
 		rozszerzona &  2 E-64\\
