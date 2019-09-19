@@ -8,18 +8,18 @@
 
 Poza realizacją algorytmu autor wykonuje testy napisanej aplikacji. Testy poprawności implementacji zostały wykonane na podstawie testów jednostkowych. Przy użyciu ów testów autor sprawdza poprawność przekształceń geometrycznych i~transferu danych między pamięciami urządzeń. Test poprawności całego modelu wykonano wyznaczając algebraicznie siatki źródeł pozornych dla kilku początkowych rzędów dla różnych układów geometrycznych pomieszczeń i~porównując je z wynikami uzyskanymi przez obliczenia przy użyciu aplikacji. Testy dla źródeł pozornych wyższych rzędów zostały wykonane dla pojedynczych punktów.
 
-W rozdziale 5.2 autor przedstawia przykładowe wykorzystanie aplikacji do analizy pola akustycznego. W tym celu przygotowane zostały geometryczne modele pomieszczeń o zróżnicowanych wymiarach i~parametrach pochłaniania dźwięku, a~następnie  porównane ze sobą.
+W rozdziale 6.2 autor przedstawia przykładowe wykorzystanie aplikacji do analizy pola akustycznego. W tym celu przygotowane zostały geometryczne modele pomieszczeń o zróżnicowanych wymiarach i~parametrach pochłaniania dźwięku, a~następnie  porównane ze sobą. Aplikacja umożliwia jedynie obliczenia na bryłach wypukłych z powierzchniami prostopadłymi do osi układu współrzędnych. Ogranicza to model geometrii do prostopadłościanu z możliwością naniesienia dodatkowych powierzchni o innym współczynniku pochłaniania na ściany boczne tego prostopadłościanu.
 
-W celu weryfikacji jednego z założeń pracy dotyczącego wydajności aplikacji autor uruchamia program na różnych urządzeniach. Do testów wykorzystane zostały urządzenia  zróżnicowane pod względem wydajności i~ilości jednostek arytmetyczno-logicznych. Autor porównuje szybkość obliczeń na danych urządzeniach dla różnych rzędów siatki źródeł pozornych. 
+W celu weryfikacji jednego z założeń pracy dotyczącego wydajności aplikacji autor uruchamia program na różnych urządzeniach. Do testów wykorzystane zostały urządzenia  zróżnicowane pod względem wydajności i~ilości jednostek arytmetyczno-logicznych. Autor porównuje czasy obliczeń na danych urządzeniach dla różnych rzędów siatki źródeł pozornych.
 
 %---------------------------------------------------------------------------
 \section{Użycie aplikacji}\label{sec:asdasd}
 
 \subsection{Obliczenia na pomieszczeniach zróżnicowanych geometrycznie}\label{sec:imstest1}
 
-Do obliczeń dla zróżnicowanych pomieszczeń zdefiniowano 3 modele geometryczne (Tabele 5.1-5.3).
+Do obliczeń dla zróżnicowanych pomieszczeń zdefiniowano 3 modele geometryczne (Tabele 6.1-6.3).
 
-\begin{table}[h]
+\begin{table}[H]
         \centering
         \begin{threeparttable}
                 \caption{Geometryczny model pomieszczenia 1}\label{tab:table_example}
@@ -34,7 +34,7 @@ Do obliczeń dla zróżnicowanych pomieszczeń zdefiniowano 3 modele geometryczn
         \end{threeparttable}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
         \centering
         \begin{threeparttable}
                 \caption{Geometryczny model pomieszczenia 2}\label{tab:table_example}
@@ -49,7 +49,7 @@ Do obliczeń dla zróżnicowanych pomieszczeń zdefiniowano 3 modele geometryczn
         \end{threeparttable}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
         \centering
         \begin{threeparttable}
                 \caption{Geometryczny model pomieszczenia 3}\label{tab:table_example}
@@ -64,67 +64,67 @@ Do obliczeń dla zróżnicowanych pomieszczeń zdefiniowano 3 modele geometryczn
         \end{threeparttable}
 \end{table}
 
-Dla danych modeli zostały wykonane wyliczenia siatek źródeł pozornych do 12 rzędu (Rys. 5.1-5.3).
+Dla danych modeli zostały wykonane wyliczenia siatek źródeł pozornych do 12 rzędu (Rys. 6.1-6.3).
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{siatka1}
 	\caption{Siatka źródeł pozornych modelu 1.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{siatka2}
 	\caption{Siatka źródeł pozornych modelu 2.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{siatka3}
 	\caption{Siatka źródeł pozornych modelu 3.}
 \end{figure}
 
-Na podstawie siatek źródeł pozornych zostały wyznaczone echogramy oraz krzywe zaniku dźwięku (Rys. 5.4-5.9).
+Na podstawie siatek źródeł pozornych zostały wyznaczone echogramy oraz krzywe zaniku dźwięku (Rys. 6.4-6.9).
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{echo1}
 	\caption{Echogram modelu 1.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{echo2}
 	\caption{Echogram modelu 2.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{echo3}
 	\caption{Echogram modelu 3.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{zanik1}
 	\caption{Krzywa zaniku dźwięku modelu 1.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{zanik2}
 	\caption{Krzywa zaniku dźwięku modelu 2.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{zanik3}
@@ -136,9 +136,9 @@ Na podstawie siatek źródeł pozornych zostały wyznaczone echogramy oraz krzyw
 
 \subsection{Obliczenia na pomieszczeniach o różnych parametrach pochłaniania}\label{sec:imstest2}
 
-Do obliczeń dla zróżnicowanych współczynników pochłaniania wykorzystano model geometryczny 1 z rozdziału 5.2.1. Dla danego modelu zdefiniowano 3 różne zestawy współczynników pochłaniania (Tabela 5.4).
+Do obliczeń dla zróżnicowanych współczynników pochłaniania wykorzystano model geometryczny 1 z rozdziału 6.2.1. Dla danego modelu zdefiniowano 3 różne zestawy współczynników pochłaniania (Tabela 6.4).
 
-\begin{table}[h]
+\begin{table}[H]
         \centering
         \begin{threeparttable}
                 \caption{Wartośći współczynników pochłaniania dźwięku dla poszczególnych powierzchni w~różnych zestawach danych}\label{tab:table_example}
@@ -157,46 +157,46 @@ Do obliczeń dla zróżnicowanych współczynników pochłaniania wykorzystano m
         \end{threeparttable}
 \end{table}
 
-Dla danych zestawów siatki źródeł pozornych stanowią te same punkty. Zróżnicowane będą jedynie poziomy poszczególnych promieni dźwiękowych dochodzących do punktu obserwacji, co można zauważyć na echogramach (Rys. 5.10-5.12).
+Dla danych zestawów siatki źródeł pozornych stanowią te same punkty. Zróżnicowane będą jedynie poziomy poszczególnych promieni dźwiękowych dochodzących do punktu obserwacji, co można zauważyć na echogramach (Rys. 6.10-6.12).
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{echoz1}
 	\caption{Echogram modelu 1.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{echo2z}
 	\caption{Echogram modelu 2.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{echoz3}
 	\caption{Echogram modelu 3.}
 \end{figure}
 
-Różne parametry pochłaniania mają wpływ na kształt i~szybkość zanikania krzywej zaniku dźwięku (Rys. 5.13-5.15).
+Różne parametry pochłaniania mają wpływ na kształt i~szybkość zanikania krzywej zaniku dźwięku (Rys. 6.13-6.15).
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{zanikz1}
 	\caption{Krzywa zaniku dźwięku modelu 1.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{zanikz2}
 	\caption{Krzywa zaniku dźwięku modelu 2.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{zanikz3}
@@ -207,62 +207,62 @@ Różne parametry pochłaniania mają wpływ na kształt i~szybkość zanikania 
 
 \subsection{Wizualizacja poszczególnych promieni dźwiękowych}\label{sec:imstest2}
 
-Podczas testów aplikacji użyteczna okazała się możliwość wizualizacji ścieżki wybranego promienia dźwiękowego. Aplikacja autora pracy umożliwia wygenerowanie skryptu jako plik wejściowy do programu GeoGebra, który umożliwia prezentację ścieżki promienia dźwiękowego dla wybranych wariacji powierzchni odbijających (Rysunek 5.16 - 5.19.).  
+Podczas testów aplikacji użyteczna okazała się możliwość wizualizacji ścieżki wybranego promienia dźwiękowego. Aplikacja autora pracy umożliwia wygenerowanie skryptu jako plik wejściowy do programu GeoGebra, który umożliwia prezentację ścieżki promienia dźwiękowego dla wybranych wariacji powierzchni odbijających (Rysunek 6.16 - 6.19.).  
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{odbicia}
 	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{odbiciaz}
-	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę XY.}
+	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę XY (S - punkt źródła dźwięku, R - punkt obserwacji).}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{odbiciay}
-	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę XZ.}
+	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę XZ (S - punkt źródła dźwięku, R - punkt obserwacji).}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{odbiciax}
-	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę YZ.}
+	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę YZ (S - punkt źródła dźwięku, R - punkt obserwacji).}
 \end{figure}
 
-Wizualizacja ścieżek promieni dźwiękowych może być przydatna w~akustyce architektonicznej przy projektowaniu rozmieszczenia ustrojów akustycznych. Rysując promienie dźwiękowe dla pierwszych odbić (Rysunek 5.20.) możemy wyznaczyć punkty, w~których dane odbicia zachodzą. Umieszczając materiał o innych właściwościach pochłaniania w~miejscach pierwszych odbić możemy wpłynąć na ilość energii jaka przychodzi do odbiornika w~pierwszych milisekundach, co pozwala bezpośrednio wpłynąć na wskaźniki C50, C80, D50 oraz wskaźnik zrozumiałości mowy.
+Wizualizacja ścieżek promieni dźwiękowych może być przydatna w~akustyce architektonicznej przy projektowaniu rozmieszczenia ustrojów akustycznych. Rysując promienie dźwiękowe dla pierwszych odbić (Rysunek 6.20.) możemy wyznaczyć punkty, w~których dane odbicia zachodzą. Umieszczając materiał o innych właściwościach pochłaniania w~miejscach pierwszych odbić możemy wpłynąć na ilość energii jaka przychodzi do odbiornika w~pierwszych milisekundach, co pozwala bezpośrednio wpłynąć na wskaźniki C50, C80, D50 oraz wskaźnik zrozumiałości mowy.
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{1szeodbicia}
-	\caption{Ścieżki promieni dźwiękowych dla pierwszych odbić.}
+	\caption{Ścieżki promieni dźwiękowych dla pierwszych odbić (S - punkt źródła dźwięku, R - punkt obserwacji).}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{1odbiciazpoch}
-	\caption{Ścieżki promieni dźwiękowych dla pierwszych odbić wraz z rozmieszczeniem materiałów pochłaniających.}
+	\caption{Ścieżki promieni dźwiękowych dla pierwszych odbić wraz z rozmieszczeniem materiałów pochłaniających (S - punkt źródła dźwięku, R - punkt obserwacji).}
 \end{figure}
 
-Dla tak przygotowanych modeli możemy wyznaczyć echogramy (Rysunek 5.21 - 5.22.) i~ilość energii, która dochodzi do punktu obserwacji. Pozwala to na dostrojenie modelu do wybranych założeń projektowych, jakimi mogą być wartości wcześniej wymienionych wskaźników.
+Dla tak przygotowanych modeli możemy wyznaczyć echogramy (Rysunek 6.21 - 6.22.) i~ilość energii, która dochodzi do punktu obserwacji. Pozwala to na dostrojenie modelu do wybranych założeń projektowych, jakimi mogą być wartości wcześniej wymienionych wskaźników.
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{echogramodbicia}
 	\caption{Echogram dla 20 pierwszych odbić.}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{echogramodbiciazpoch}
@@ -273,9 +273,9 @@ Dla tak przygotowanych modeli możemy wyznaczyć echogramy (Rysunek 5.21 - 5.22.
 
 \section{Testy wydajnościowe}\label{sec:asdas2d}
 
-Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów – CPU i~GPU. Do pomiarów na CPU posłużył procesor Intel Core i5-2520M (Tabela 5.5). Pomiaru przy użyciu GPU przeprowadzono na kartach Radeon R7 250X (Tabela 5.6) oraz Radeon R9 270X (Tabela 5.7).
+Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów – CPU i~GPU. Do pomiarów na CPU posłużył procesor Intel Core i5-2520M (Tabela 6.5). Pomiaru przy użyciu GPU przeprowadzono na kartach Radeon R7 250X (Tabela 6.6) oraz Radeon R9 270X (Tabela 6.7). Obliczenia testowe zostały wykonane na zmiennych o pojedynczej precyzji.
  
-\begin{table}[h]
+\begin{table}[H]
         \centering
         \begin{threeparttable}
                 \caption{Dane techniczne procesora Intel Core i5-2520M}\label{tab:table_example}
@@ -289,7 +289,7 @@ Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów �
         \end{threeparttable}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
         \centering
         \begin{threeparttable}
                 \caption{Dane techniczne karty graficznej Radeon R7 250x}\label{tab:table_example}
@@ -302,7 +302,7 @@ Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów �
         \end{threeparttable}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[H]
         \centering
         \begin{threeparttable}
                 \caption{Dane techniczne karty graficznej Radeon R9 270x}\label{tab:table_example}
@@ -315,32 +315,75 @@ Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów �
         \end{threeparttable}
 \end{table}
 
-Pomiary przeprowadzono na modelu 1 z rozdziału 5.2.1 (Rys. 5.1.) dla rzędów źródeł pozornych od 5 do 12. Autor porównał ze sobą czasy obliczeń na różnych platformach (Rys. 5.13.).
+Pomiary przeprowadzono na modelu 1 z rozdziału 6.2.1 (Rysunek~6.1.) dla rzędów źródeł pozornych od 5 do 12. Autor porównał ze sobą czasy obliczeń na różnych platformach (Rysunek~6.13.,~Tabela~6.8.).
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{wykres}
 	\caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla różnych urządzeń.}
 \end{figure}
 
-W celu sprawdzenia wydajności implementacji algorytmu w~środowisku OpenCL autor porównał czas obliczeń algorytmu w~tym środowisku z czasem obliczeń algorytmu zaimplementowanego przy użyciu czystego kodu C++, bez użycia wielowątkowości (Rys. 5.14).
+\begin{table}[H]
+        \centering
+        \begin{threeparttable}
+                \caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla języka C++ i OpenCL. Kod został uruchomiony na architekturze Intel Core i5-2520M (Tabela 6.5).}\label{tab:table_exa2mple}
+                \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
+                        \midrule
+                        	rząd siatki &	\multicolumn{2}{c}{czas obliczeń [ms]} & \\
+                 \midrule
+		                         & Intel i5 & Radeon R7 & Radeon R9 \\
+                 \midrule
+ 5 & 0 & 0  & 0 \\
+6 & 0 & 0 & 0 \\
+7 & 63 & 16 & 16 \\
+8 & 11E2 & 125 & 30 \\
+9 & 23E3 & 14E2 & 843 \\
+10 & 91E3 & 52E2 & 42E2 \\
+11 & 12E4 & 68E2 & 51E2 \\
+12 & 27E4 & 16E4 & 12E2 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
 
-\begin{figure}[h]
+W celu sprawdzenia wydajności implementacji algorytmu w~środowisku OpenCL autor porównał czas obliczeń algorytmu w~tym środowisku z czasem obliczeń algorytmu zaimplementowanego przy użyciu czystego kodu C++, bez użycia wielowątkowości (Rysunek~6.14.,~Tabela~6.9.).
+
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{wykres2}
-	\caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla różnych urządzeń.}
+	\caption{Zależność czasu obliczeń od używanego środowiska.}
 \end{figure}
+
+\begin{table}[H]
+        \centering
+        \begin{threeparttable}
+                \caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla różnych urządzeń.}\label{tab:table_exa2mple}
+                \begin{tabularx}{0.6\textwidth}{| c | X | X |}
+                        \midrule
+                        	rząd siatki &	\multicolumn{1}{c}{czas obliczeń [ms]}  & \\
+                 \midrule
+		                         & OpenCL & C++11 \\
+                 \midrule
+ 5 & 0 & 1   \\
+6 & 0 & 16  \\
+7 & 63 & 85  \\
+8 & 11E2 & 545  \\
+9 & 23E3 & 33E2  \\
+10 & 91E3 & 22E3  \\
+11 & 12E4 & 16E4 \\
+12 & 27E4 & 95E4  \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
 
 %---------------------------------------------------------------------------
 
 \section{Błąd obliczeń}\label{sec:asdas2sd}
 
-Większa część algorytmu metody źródeł pozornych odpowiada za sprawdzenie czy dany promień dźwiękowy istnieje w~danym modelu geometrycznym. Sprawdzenie odpowiada jedynie za decyzję czy dany promień będzie uwzględniany w~siatce źródeł pozornych i~nie wpływa na błąd wyniku końcowego. Błąd obliczonych pozycji siatki źródeł pozornych powstaje w~wyniku narastania błędu zaokrąglenia podczas operacji arytmetycznych związanych z wyznaczaniem kolejnych odbić lustrzanych punktu źródła. Do obliczenia współrzędnej odbicia należy wykonać 4 mnożenia co czterokrotnie zwiększa wartość błędu względnego $\epsilon$. Dla współrzędnych zapisanych w~zmiennych typu float daje to błąd względny równy |$\delta$| = 2 E-21. Dla źródeł pozornych N-tego rzędu wartość tego błędu wzrasta o N razy. Nawet dla źródeł pozornych 16-tego rzędu błąd wynosi |$\delta$| = 2 E-17. W akustyce architektonicznej błędy danych wejściowych są o kilkanaście rzędów wielkości większe od tego błędu przez co może on zostać pominięty w~obliczeniach.
-
-
-
+Większa część algorytmu metody źródeł pozornych odpowiada za sprawdzenie czy dany promień dźwiękowy istnieje w~danym modelu geometrycznym. Sprawdzenie odpowiada jedynie za decyzję czy dany promień będzie uwzględniany w~siatce źródeł pozornych i~nie wpływa na błąd wyniku końcowego. Błąd obliczonych pozycji siatki źródeł pozornych powstaje w~wyniku narastania błędu zaokrąglenia podczas operacji arytmetycznych związanych z wyznaczaniem kolejnych odbić lustrzanych punktu źródła. Do obliczenia współrzędnej odbicia należy wykonać 4 mnożenia co czterokrotnie zwiększa wartość błędu względnego $\epsilon$. Dla współrzędnych zapisanych w~zmiennych typu float daje to błąd względny równy |$\delta$| = 2 E-21. Dla źródeł pozornych N-tego rzędu wartość tego błędu wzrasta o N razy. Nawet dla źródeł pozornych 16-tego rzędu błąd wynosi |$\delta$| = 2 E-17. W akustyce architektonicznej błędy danych wejściowych są o kilkanaście rzędów wielkości większe od tego błędu przez co może on zostać pominięty w~obliczeniach.\\
 
 
 

@@ -19,20 +19,20 @@ W przypadku metod geometrycznych falę dźwiękową modelujemy jako prosty obiek
 
 W celu wyznaczenia siatki źródeł pozornych N-tego rzędu zdefiniujmy punkt źródła dźwięku $S$, punkt odbioru $R$ oraz K-liczny zbiór powierzchni odbijających $P_i$ gdzie $i$ oznacza numer powierzchni (Rys. 2.1.). 
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{rys1}
-	\caption{Model geometrii pomieszczenia.}
+	\caption{Model geometrii pomieszczenia (S - punkt źródła dźwięku, R - punkt obserwacji, Pn - kolejne powierzchnie odbijające).}
 \end{figure}
 
 Do znalezienia wszystkich źródeł pozornych N-tego rzędu należy wygenerować wszystkie $K^N$ wariacje z powtórzeniami zbioru $P$. Na wstępie możemy pominąć wariacje, w~których ta sama powierzchnia jest przynajmniej dwoma kolejnymi elementami ciągu, ponieważ promień dźwiękowy nie może dwukrotnie z rzędu odbić się od tej samej powierzchni. Każda wariacja reprezentuje jeden promień dźwiękowy, który odbija się kolejno od każdej powierzchni w~wariacji. Aby znaleźć źródło pozorne dla danego promienia dźwiękowego należy odbić punkt źródła symetrycznie względem każdej z płaszczyzn w~wariacji (Rys. 2.2.). 
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{rys2}
-	\caption{Pierwsze i~drugie odbicie względem powierzchni.}
+	\caption{Pierwsze i~drugie odbicie względem powierzchni  (S - punkt źródła dźwięku, S' i S'' - kolejne odbicia symetryczne punktu S względem powierzchni odbijających, R - punkt obserwacji, Pn - kolejne powierzchnie odbijające).}
 \end{figure}
 
 Dla uzyskanego punktu należy zweryfikować, czy promień dźwiękowy jest w~stanie dotrzeć od punktu źródła do punktu odbiornika w~danym układzie geometrycznym. W tym celu należy prześledzić ścieżkę promienia dźwiękowego wstecz – zaczynając od punktu obserwacji. Początkowy kierunek promienia znajduje się wyznaczając wektor rozpięty od punktu źródła pozornego do punktu obserwacji. Prosta przechodząca przez te punkty powinna przecinać ostatnią powierzchnię z wariacji. Kąt pomiędzy wektorem wyznaczającym kierunek ścieżki promienia dźwiękowego a~wektorem normalnym płaszczyzny, na której leży powierzchnia odbijająca, powinien być mniejszy niż 90 stopni. Odcinek łączący punkt obserwacji z punktem przecięcia powyższej prostej z powierzchnią odbijającą stanowi fragment ścieżki promienia dźwiękowego. Kolejny fragment ścieżki promienia dźwiękowego wyznacza się odbijając symetrycznie poprzedni odcinek względem kolejnej powierzchni odbijającej. Z każdym krokiem należy sprawdzić czy odcinek ścieżki promienia dźwiękowego przecina płaszczyzny względem których się odbija. Jeśli uda się prześledzić ścieżkę promienia dźwiękowego od punktu obserwacji do punktu źródła, można sprawdzany punkt uznać za źródło pozorne i~uwzględnić w~siatce źródeł pozornych.
@@ -70,23 +70,23 @@ gdzie
 
 Przyjmując prostopadłościenne pomieszczenie z umieszczonym punktowym źródłem dźwięku i~punktem obserwacji (Rys. 2.3.), wyznaczamy siatkę źródeł pozornych (Rys. 3.4.). Dla przejrzystości rysunku siatka została wyznaczona dla maksymalnie trzeciego odbicia.
  
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{rys3}
-	\caption{Model geometrii pomieszczenia.}
+	\caption{Model geometrii pomieszczenia (S - punkt źródła dźwięku, R - punkt obserwacji).}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{rys4}
-	\caption{Siatka źródeł pozornych.}
+	\caption{Siatka źródeł pozornych (S - punkt źródła dźwięku, R - punkt obserwacji).}
 \end{figure}
 
 Położenia  źródeł pozornych w~siatce dają informację o kierunkach promieni dźwiękowych dochodzących do punktu obserwacji. Uwzględniając straty energii pochłoniętej przez odbicia oraz starty energii związanej z rozchodzeniem się fali kulistej możemy wyznaczyć  ilość energii i~czas, w~jakim dotrze ona do punktu obserwacji dla każdego źródła pozornego. Zależność energii dochodzącej do punktu odbioru od czasu przedstawiona jest na poniższym echogramie (Rys. 2.5.).
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{rys5}
@@ -95,7 +95,7 @@ Położenia  źródeł pozornych w~siatce dają informację o kierunkach promien
 
 Uzyskany echogram lub jego część mogą być użyte do obliczenia wskaźników C50, C80, D50. Poprzez całkowanie wsteczne echogramu można uzyskać krzywą zaniku energii dźwięku w~pomieszczeniu (Rys. 2.6.).
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{rys6}

@@ -6,11 +6,11 @@
 
 
 Lata 50-te XX wieku były przełomowym okresem w~dziedzinie elektronicznego przetwarzania danych. Opracowana w~1945 roku \emph{Architekura von Neumana}~\cite{b16} pozwoliła na uruchomienie pierwszych komputerów ogólnego przeznaczenia. Mimo, że \emph{Architektura Harwardzka}~\cite{b17} została opracowana 6 lat wcześniej, \emph{Architektura von Neumana} była łatwiejsza w~implementacji przez przechowywanie danych wraz z programem na jednej wspólnej pamięci. Pierwszym komputerem opartym na pomyśle Neumana, który wykonywał instrukcje zapisane w~fizycznej pamięci, był powstały w~1948 roku Small-Scale Experimental Machine. Stał się on bazą do rozwijania kolejnych urządzeń. W ten sposób w~1949 roku powstał EDSAC (akronim od ang. Electronic Delay Storage Automatic Calculator). Został uznany jako  pierwszy komputer wykorzystywany w~praktyce do obliczeń naukowych. EDSAC rozbudowany był o dodatkowe układy peryferyjne. W celu odczytu danych zastosowano w~nim dalekopis – aparat drukujący dane w~postaci alfanumerycznej. Skonstruowanie komputerów zerowej, pierwszej i~drugiej generacji znacznie rozwinęło moc obliczeniową tych urządzeń. W dalszym ciągu jednak stosowano niewygodne formy prezentacji danych – wyświetlacze złożone z szeregu lamp, perforowane karty. W 1975 roku, w~jednym z pierwszych komputerów osobistych IBM 5100, zastosowano kineskopowy wyświetlacz, który mógł wyświetlać 16 linii po 64 znaków. 6 lat później, w~kolejnym modelu IBM 5150, wprowadzono możliwość instalacji kart rozszerzeń ISA. Zastosowano w~nim pierwszą kartę graficzną Monochrome Display Adapter (MDA). Rozpoczęło to rozwój peryferyjnych układów komputera, które stały się niezależnymi platformami z własnym procesorem i~pamięcią. Początkowo karty graficzne były w~stanie wyświetlać jedynie znaki alfanumeryczne przechowywane w~pamięci karty. Kolejne generacje kart pozwalały na rysowanie obrazów przy użyciu pojedynczych pikseli, a~nowoczesne układy graficzne pozwalały na akcelerację 2D i~3D, korzystając z wbudowanych funkcji do generowania obrazu. W najnowszych procesorach grafiki umożliwiono użytkownikowi zaprogramowanie ich w~dowolny sposób. Charakterystyka obliczeń przy przetwarzaniu obrazów wymusiła architekturę procesorów graficznych w~postaci dużej ilości jednakowych jednostek ALU (ang. Arithmetic Logic Units), potrafiących wykonać równolegle wiele prostych operacji (Rys. 3.1.).
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{rys7}
-	\caption{Architektura procesora GPU.}
+	\caption{Architektura procesora GPU (ALU - jednostka arytmetyczno-logiczna, DRAM - pamięć dynamiczna, control - jednostka sterująca, cache - pamięć cache).}
 \end{figure}
 Taka budowa kart graficznych pozwoliła na wykorzystanie ich nie tylko do obliczeń związanych z generowaniem grafiki, ale także innych obliczeń przetwarzania danych, co doprowadziło do powstania kart ogólnego przeznaczenia (GPGPU).
 
@@ -21,6 +21,7 @@ Taka budowa kart graficznych pozwoliła na wykorzystanie ich nie tylko do oblicz
 \section{Heterogeniczne platformy obliczeniowe}\label{sec:hetero}
 
 Początkowo GPGPU były wykorzystywane do zaawansowanego generowania grafiki. Dążenie do realizmu w~grach komputerowych rozwinęło karty graficzne o algorytmy wymagające przetwarzania równoległego, takie jak shading~\cite{b18} czy ray-tracing~\cite{b3}. W celu odciążenia procesora od złożonych obliczeń, na kartach graficznych zaczęto implementować fizykę obiektów – obliczenia związane z mechaniką klasyczną, symulacje zachowania cieczy, zachowania układów ciągłych i~inne efekty cząsteczkowe. Dla ułatwienia programistom wykorzystania możliwości GPGPU, NVIDIA w~2007 roku wprowadza platformę CUDA. Jest to środowisko programistyczne i~biblioteka umożliwiająca wykorzystanie kart graficznych produkowanych przez firmę NVIDIA. Umożliwia ona pisanie kodu opartego na C/C++ wykonywanego na procesorze karty i~mającego bezpośredni dostęp do jej pamięci. Ułatwienie implementacji algorytmów na GPGPU rozwinęło wykorzystywanie tych kart w~różnych dziedzinach naukowych, takich jak kryptografia, fizyka kwantowa, ekonomia czy medycyna. Wykonywanie  skomplikowanych obliczeń przy użyciu CUDA stało się powszechne na komputerach domowych, ale było ograniczone przez wymagania sprzętowe. 2 lata po wprowadzeniu CUDA firma Apple Inc wprowadza OpenCL (ang. Open Computing Language). W przeciwieństwie do produktu NVIDA, OpenCL umożliwia pisanie programów na heterogeniczne platformy – układy złożone z różnego rodzaju procesorów. Daje to możliwość pisania aplikacji na komputery z układami większości popularnych producentów, lub  na dowolne układy złożone z różnych procesorów (m. in. CPU, GPU, DSP, FPGA), oraz zapewnia przenośność programów.
+
 
 %---------------------------------------------------------------------------
 
@@ -70,36 +71,145 @@ Równoległość na poziomie danych wykorzystywana jest przy obliczeniach na du�
 
 Równoległość na poziomie zadań to model, gdzie równolegle wykonywane są różne zadania na tych samych lub różnych zbiorach danych. Najczęściej wykorzystywany jest na wielordzeniowych procesorach CPU, gdzie każdy rdzeń może wykonywać bardziej złożone operacji niż w~przypadku modelu równoległości danych. Rozdzielenie zadań pomiędzy rdzenie wykonywane jest na poziomie pisania kodu aplikacji lub obsługiwane przez system operacyjny. Większość współczesnych systemów operacyjnych wykorzystuje równoległość zadań do wykonywania procesów na oddzielnych wątkach.
 
+
+\section{Błędy obliczeniowe}\label{sec:errors}
+
+\subsection{Błędy obliczeń numerycznych}\label{sec:numerr}
+
+Wykorzystując do obliczeń cyfrowe układy należy mieć na uwadze, że niemal wszystkie obliczenia numeryczne są obarczone błędem. Źródłami tych błędów dla metod numerycznych są:
+
+- błędy wejściowe,
+
+- błędy obcięcia,
+
+- błędy zaokrągleń.
+
+Błędy wejściowe związane są błędami danych wejściowych do algorytmu obliczeniowego. Jeśli dana wejściowa jest wynikiem pomiaru wielkości fizycznej, to jest obarczona błędem tego pomiaru. Dodatkowo zapisanie jej w~formacie cyfrowym wprowadza błąd wstępnego zaokrąglenia lub urwania. Wykorzystywane w~obliczeniach stałe, które są niewymierne, również są obarczone błędem wstępnego zaokrąglenia lub urwania. Błąd zaokrąglenia jest mniejszy od błędu urwania, ale nie zawsze zaokrąglenie jest możliwe do wykonania. Przy pomiarach czasu rzeczywistego niektóre przetworniki analogowo-cyfrowe są w~stanie przybliżyć wartość pomiary jedynie przez operację urwania.
+
+Błędy obcięcia występują przy uproszczeniach formuł matematycznych wykorzystywanych w~algorytmie metody numerycznej lub w~obliczaniu wartości funkcji i~stałych. W środowisku cyfrowym większość stałych niewymiernych wyznaczana jest przy użyciu nieskończonych szeregów. Uwzględniając w~obliczeniach skończoną ilość wyrazów szeregu uzyskujemy przybliżoną wartość stałej, a~jej błąd uzależniony jest od ilości obliczonych wyrazów.
+
+Błędy zaokrągleń powstają podczas zaokrąglania wyników wykonywanych operacji arytmetycznych. Każdy kolejny wynik zapisywany jest z pewnym zaokrągleniem, więc każda kolejna operacja wprowadza coraz większy błąd. Wartość tego błędu można zmienić w~zależności od liczby wykonywanych lub przy zmianie kolejności działań. 
+
+\subsection{Cyfrowa reprezentacja liczb}\label{sec:numera}
+
+Technologia w~jakiej wykonywana jest fizyczna pamięć komputerów wymusza do przechowywania liczb i~danych stosowanie systemu binarnego. O ile liczby całkowite do pewnego zakresu mogą być przechowywane z dokładną wartością, o tyle wiele liczb niecałkowitych wymaga zaokrąglenia ze względu na ograniczoną szerokość słowa bitowego. Nawet liczba mająca skończone rozwinięcie po przecinku w systemie dziesiętnym może mieć nieskończone rozwinięcie w systemie binarnym. Dla zrównoważenia wielkości zakresu i~precyzji reprezentacji liczb rzeczywistych często używa się typu liczb zmiennoprzecinkowych. Obecnie najczęściej używanym standardem jest IEEE 754 (Wzór 3.1).
+
+\begin{equation}
+-1^s\cdot m \cdot 2^e
+\end{equation}
+gdzie
+\begin{eqwhere}[2cm]
+        \item[$s$]znak liczby ( 0 - dla liczby ujemnej, 1 - dla liczby dodatniej)
+        \item[$m$] mantysa liczby
+        \item[$e$] wykładnik, który odpowiada za pozycję przecinka 
+\end{eqwhere}
+
+Powyższy standard definiuje trzy typy danych:
+
+- liczba pojedynczej prezycji (ang. signle precision),
+
+- liczba podwójnej precyzji (ang. double precision),
+
+- liczba o rozszerzonej precyzji (ang. extended precision).
+
+W zależności szerokości bitowej danego typu liczba zmiennoprzecinkowa ma różny zakres i~precyzję (Tabela 3.1).
+
+\begin{table}[H]
+        \centering
+        \begin{threeparttable}
+                \caption{Typy danych w~standardzie IEEE 754.}\label{tab:table_exampleaz}
+                \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
+                        \midrule
+                        	precyzja	&	szerokość & mantysa & wykładnik \\
+\midrule
+		pojedyncza  & 32 bitów & 23 bity & 8 bitów \\
+                        podwójna  & 64 bity & 52 bity & 11 bitów \\
+		rozszerzona & 80 bitów & 64 bity & 15 bitów \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+Zakres danych możliwy do zapisania na poszczególnych typach obrazuje Tabela 3.2, w~której przedstawione są najmniejsze i~największe dodatnie liczby możliwe do zapisania na tych typach.
+
+\begin{table}[H]
+        \centering
+        \begin{threeparttable}
+                \caption{Przybliżone wartości minimalne i~maksymalne dodatnich liczb zmiennoprzecinkowych standardu IEEE 754.}\label{tab:table_exampleazd}
+                \begin{tabularx}{0.6\textwidth}{| c | X | X |}
+                        \midrule
+                        	precyzja	&	w. min. & w. maks. \\
+\midrule
+		pojedyncza  & 1,18 E-38 & 3,40 E+38 \\
+                        podwójna  & 2,23 E-308 & 1,90 E+308 \\
+		rozszerzona &  3,65 E-4951 & 1,18 E+104932 \\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
+W standardzie IEEE 754 zostały zdefiniowane następujące metody zaokrąglania liczb:
+
+- Zaokrąglanie do najbliższej wartości (ang. round to nearest),
+
+- zaokrąglanie w~kierunku zera (ang. round toward 0),
+
+- zaokrąglanie w~stronę dodatniej nieskończoności (ang. round toward +infinity),
+
+- zaokrąglanie w~stronę ujemnej nieskończoności (ang. round toward -infinity).
+
+Standard wykorzystuje zaokrąglanie do najbliższej wartośc jako domyślną metodę. W zależności od typu, zaokrąglenie może dać różny wynik. W zależności od procesora lub kompilatora operacje arytmetyczne mogą być wykonywane przy użyciu różnych funkcji procesora, które operują na różnych typach danych. Mimo obliczeń na zmiennych o~jednolitym typie danych, wynik może się różnić w~zależności od platformy sprzętowej.
+
+Błąd zaokrąglenia na maszynie cyfrowej zdefiniowany jest przy użyciu dokładnści maszynowej $\epsilon$. Dokładność maszynowa to różnica pomiędzy 1 a~najbliższą jej wartością większą od niej. Zaokrąglenie liczby rzeczywistej do zmiennoprzecinkowej następuje z błędem względnym $\frac{\epsilon}{2}$. Wartości błędu względnego dla poszczególnych typów danych przedstawia Tabela 3.3. 
+
+\begin{table}[H]
+        \centering
+        \begin{threeparttable}
+                \caption{Wartości błędu względnego $\epsilon$ zaokrąglenia dla liczb zmiennoprzecinkowych standardu IEEE 754.}\label{tab:table_exampleazd}
+                \begin{tabularx}{0.6\textwidth}{| c | X |}
+                        \midrule
+                        	precyzja	& $\epsilon$  \\
+		\midrule
+		pojedyncza  &   2 E-23\\
+                        podwójna  &   2 E-52\\
+		rozszerzona &   2 E-64\\
+                        \bottomrule
+                \end{tabularx}
+        \end{threeparttable}
+\end{table}
+
 %---------------------------------------------------------------------------
 
-\section{Środowisko OpenCL}\label{sec:OpenCL}
+\chapter{Środowisko OpenCL}\label{sec:OpenCL}
+
+\section{Wprowadzenie}\label{sec:wprowadzenieope}
 
 OpenCL~\cite{b21} jest platformą programistyczną opracowaną w~2009 roku przez Apple Inc, a~następnie utrzymywaną przez Khronos Group. Umożliwia programowanie heterogenicznych układów procesorowych w~języku opartym na C99 i~C++11. Wykorzystanie OpenCL nie ogranicza się jedynie do procesorów graficznych. Jego główną zaletą jest przenośność na większość popularnych procesorów CPU, DSP, a~nawet układów FPGA. Każdy procesor z instrukcjami SSE2 może zostać wykorzystany jako urządzenie OpenCL. Standard OpenCL dostarcza interfejs programistyczny (API), biblioteki dla wielu popularnych języków programowania oraz sterowniki do urządzeń.
 
-\subsection{Platforma}\label{sec:platforma}
+\section{Platforma}\label{sec:platforma}
 
-Aplikacja pisana w~OpenCL opiera się na jednostkach zwanych platformami. Każda platforma odpowiada za przygotowanie danych do obliczeń i~rozdzielenie zadań. W nowszych standardach kod platformy może być pisany w~wielu popularnych językach  (m. in. Python, Matlab). Każda platforma zawiera kontekst, w~którym definiowane są dane wejściowe, kolejka zadań i~urządzenia do wykonywania obliczeń. Każde urządzenie zawiera jednostki obliczeniowe (ang. compute units, CU), które składają się z elementów przetwarzania (ang. processing elements, PEs)(Rys. 3.2.). 
+Aplikacja pisana w~OpenCL opiera się na jednostkach zwanych platformami. Każda platforma odpowiada za przygotowanie danych do obliczeń i~rozdzielenie zadań. W nowszych standardach kod platformy może być pisany w~wielu popularnych językach  (m. in. Python, Matlab). Każda platforma zawiera kontekst, w~którym definiowane są dane wejściowe, kolejka zadań i~urządzenia do wykonywania obliczeń. Każde urządzenie zawiera jednostki obliczeniowe (ang. compute units, CU), które składają się z elementów przetwarzania (ang. processing elements, PEs)(Rys. 4.1.). 
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{rys8}
-	\caption{Architektura programu napisanego w~bibliotece OpenCL.}
+	\caption{Architektura programu napisanego w~bibliotece OpenCL (CU - jednostka obliczeniowa, PE - element przetwarzania).}
 \end{figure}
 
 Pojedyńcza platforma odnosi się do poszczególnego sterownika. Przykładowo na komputerze z procesorem Intel i~kartą graficzną AMD mozemy uruchomić dwie platformy, jedną dla OpenCL™ Runtimes for Intel® Processors~\cite{b22} i~drugą dla wyspecjalizowanego sterownika AMD dla danej karty graficznej. Każda platforma może obsługiwać więcej niż jedno urządzenie, w~szczególnych przypadkach może zawierać złożone układy kart graficznych. 
 
 Standard OpenCL definiuje obsługę mieszanych wersji platform (ang. Platform Mixed Version Support). Oznacza to, że w~jednej aplikacji możemy użyć różnych wersji platform, urządzeń i~języka OpenCL. Domyślnie standard używa najnowszej wersji języka dostępnej na danym urządzeniu.
 
-\subsection{Model wykonywania programu}\label{sec:mwp}
+\section{Model wykonywania programu}\label{sec:mwp}
 
 Wykonywanie programu OpenCL następuje w~dwóch krokach: uruchomienie kodu głównego na urządzeniu gospodarza i~wykonywanie kodu kernela na urządzeniach OpenCL. Kod gospodarza definiuje platformy i~zarządza wykonywaniem kerneli. Dla każdego kernela definiowana jest przestrzeń indeksowania. Każdy element przestrzeni indeksowania jest unikalnym identyfikatorem i~dla każdego z nich wykonywany jest kod kernela. Instancję kernela wywołaną w~obrębie jednego indeksu nazywamy wątkiem (ang work-item). Każdy wątek wykonuje ten sam kod, ale jego działanie może zależeć od przydzielonego mu indeksu. Posługując się identyfikatorem z przestrzeni indeksowej możemy dla każdego wątku wybrać inny zakres danych do obliczeń lub wykonać inny typ obliczeń. Ta własność, w~połączeniu z możliwością wykonywania różncych kerneli w~jednej aplikacji, umożliwia pisanie programów zarówno w~modelu równoległości danych, jak i~modelu równoległości zadań.
 
-\subsection{Przestrzeń indeksowania}\label{sec:OpenC5L}
+\section{Przestrzeń indeksowania}\label{sec:OpenC5L}
 
 Przestrzeń indeksowania w~standardzie OpenCL definiowana jest przez typ NDRange. Jest to jedno-, dwu- lub trójwymiarowa tablica liczb całkowitych. Cała przestrzeń dzieli się na grupy o takim samym wymiarze jak wymiar całej przestrzeni (ang. work-groups). Każdy wątek może być zidentyfikowany po jego globalnym indeksie lub po kombinacji indeksu grupy i~lokalnego indeksu wewnątrz grupy. Wątki wewnątrz jednej grupy wykonywane są na jednym elemencie przetwarzania. Podział na grupy może być zrealizowany ze względu na ilość jednostek przetwarzania lub charakter obliczeń. Przestrzeń ideksowania stanowią rosnące wartości liczb całkowitych z zadanym przesunięciem, więc może ona reprezentować indeksy wektora, macierzy lub dziedzinę funkcji.
 
-\subsection{Kontekst obliczeniowy}\label{sec:OpenC2L}
+\section{Kontekst obliczeniowy}\label{sec:OpenC2L}
 
 Definiowany na urządzeniu gospodarza na pojedyńczej platformie kontekst obliczeniowy odpowiada za przygotowanie następujących zasobów:
 
@@ -124,7 +234,7 @@ Wykonywanie zadań z kolejki może być wykonywane w~kolejności (ang. In-order 
 W jednym kontekście może być zdefiniowana więcej niż jedna kolejka. Takie kolejki wykonywane są jednocześnie i~niezależnie. Standard OpenCL nie udostępnia mechanizmu dedykowanego do synchronizacji pomiędzy kolejkami.
 
 
-\subsection{Kernel}\label{sec:OpenC4L}
+\section{Kernel}\label{sec:OpenC4L}
 
 Funkcja kernela jest kodem napisanym w~języku OpenCL wykonywanym na urządzeniu OpenCL. Zdefiniowa jest poprzez kwalifikator \verb|__kernel|. Język kernela oparty jest na C99 i~C++11 i~w zależności od wersji OpenCL może wykorzystywać niektóre funkcje biblioteczne z tych języków. Przykładowo od wersji OpenCL 1.2 w~kodzie kernela możliwe jest użycie funkcji printf.
 
@@ -134,9 +244,9 @@ Rozróżniane są dwa typy kerneli:
 
 - Natywne kernele - funkcje skompilowane przez inny kompilator niż OpenCL. Najczęściej są to funkcje wyeksportowane z zewnętrznych bibliotek.\\
 
-Kod kernela kompilowany jest do obiektu kernela podczas wykonywania kodu głównego na urządzeniu gospodarza. Zbudowanie obiektu kernela wytwarza program oparty na jego kodzie i~powiązany z przypisanymi mu danymi wejściowymi. Dane wejściowe mogą być przekazane do kernela w~postaci wskaźnika na adres pamięci urządzenia gospodarza lub przeniesione do lokalnej pamięci urządzenia. Formy przekazywania pamięci i~jej typy przedstawione są w~rozdziale 3.4.8.
+Kod kernela kompilowany jest do obiektu kernela podczas wykonywania kodu głównego na urządzeniu gospodarza. Zbudowanie obiektu kernela wytwarza program oparty na jego kodzie i~powiązany z przypisanymi mu danymi wejściowymi. Dane wejściowe mogą być przekazane do kernela w~postaci wskaźnika na adres pamięci urządzenia gospodarza lub przeniesione do lokalnej pamięci urządzenia. Formy przekazywania pamięci i~jej typy przedstawione są w~rozdziale 4.9.
 
-\subsection{Urządzenia OpenCL}\label{sec:OpenC21L}
+\section{Urządzenia OpenCL}\label{sec:OpenC21L}
 
 Urządzenie OpenCL stanowi interfejs do zbioru jednostek obliczeniowych. W generalnym przypadku są to karty GPU, wielordzeniowe procesory CPU, DSP i~procesory typu Cell/B.E.
 
@@ -154,11 +264,11 @@ Standard OpenCL udostępnia 5 różnych rodzajów urządzeń:
 
 Przy użyciu typu urządzenia możemy pobrać uchwyty do wybranych urządzeń dostępnych na platformie. Pobrane urządzenia mogą być przekazane do kontekstu gdzie definiowane jest ich użycie. Platforma OpenCL umożliwia pobranie informacji o urządzeniu takich jak typ urządzenia czy ilość jednostek obliczeniowych i~elementów przetwarzania. Pozwala to na planowanie podziału danych, grup i~przestrzeni indeksowania na poziomie pisania kodu i~dynamiczne przydzielanie tych wartości w~czasie wykonywania programu w~zależności od urządzeń, na jakich jest on wykonywany.
  
-\subsection{Jednostki obliczeniowe i~elementy przetwarzania}\label{sec:OpenC3L}
+\section{Jednostki obliczeniowe i~elementy przetwarzania}\label{sec:OpenC3L}
 
 Jednostki obliczeniowe (ang, Compute Unit, CU) i~elementy przetwarzania (ang. Processing Element, PE) reprezentują różne fizyczne elementy procesora w~zależności od jego rodzaju. Dla procesorów CPU CU jest równoważne PE i~stanowi pojedyńczy rdzeń procesora. W kartach graficznych NVIDIA CU stanowi multiprocesor strumieniowy, a~PE jego rdzenie. Karty graficzne AMD definiują CU jako jednostkę SIMD (ang. Single Instruction, Multiple Thread), a~PE jako poszczególne linie jednostki SIMD. Na pojedyńczym elemencie przetwarzania wykonywany jest jeden wątek. Mimo że w~zależności od urządzenia CU i~PE reprezentują różne elementy procesora, odwołują się do nich w~ten sam sposób. Umożliwia to wykonywanie programu gospodarza i~kernela o jednakowej składni na różnych typach urządzeń. Kernele wykonywane są według kolejki zadań i~rozdzielone pomiędzy jednostki obliczeniowe mogą być wykonywane równolegle na wielu elementach przetwarzania.
 
-\subsection{Dostep do pamieci}\label{sec:OpenC6L}
+\section{Dostep do pamieci}\label{sec:OpenC6L}
 
 OpenCL umożliwia dynamiczny dostęp do pamięci urządzeń oraz pamięci gospodarza. Każdy wątek ma dostęp do czterech typów pamięci:
 
@@ -170,13 +280,13 @@ OpenCL umożliwia dynamiczny dostęp do pamięci urządzeń oraz pamięci gospod
 
 - Pamięci prywatnej – pamięci dostępnej w~obrębie jednego wątku.\\
 
-Przepływ danych pomiędzy urządzeniem gospodarza a~urządzeniem OpenCL może odbyć się poprzez operację kopiowania  lub odwzorowania z pamięci platformy do pamięci urządzenia. Rozmieszczenie typów pamięci i~ich wzajemne relacje przedstawione są na Rysunku 3.2.
+Przepływ danych pomiędzy urządzeniem gospodarza a~urządzeniem OpenCL może odbyć się poprzez operację kopiowania  lub odwzorowania z pamięci platformy do pamięci urządzenia. Rozmieszczenie typów pamięci i~ich wzajemne relacje przedstawione są na Rysunku 4.2.
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=12cm]{architekturapamieci}
-	\caption{Architektura pamięciu na urządzeniach OpenCL.}
+	\caption{Architektura pamięciu na urządzeniach OpenCL (PE - jednostka przetwarzania).}
 \end{figure}
 
 Operacja kopiowania danych pomiędzy pamięcią gopodarza a~pamięcią urządzenia jest wywoływana przez zadanie przeniesienia danych znajdujące się w~kolejce zadań. Zadanie przeniesienia może być blokujące lub nieblokujące. Przeniesienie blokujące zabrania dostępu do pamięci urządzenia gospodarza aż do czasu zakończenia przenoszenia danych. Dostęp do pamięci urządzenia gospodarza przez wskaźnik na adres pamięci umożliwia modyfikację danych w~tej pamięci przez wiele kerneli jednocześnie. Może to być wykorzystywane przy operacjach na wspólnym zbiorze danych takich jak funkcja splotu czy mnożenie macierzy.
@@ -186,7 +296,7 @@ Standard OpenCL opiera się na luźnym modelu spójności pamięci (ang. relaxed
 Dużym ograniczeniem wydajności obliczeń jest czas dostępu do pamięci. Pamięć o szerszym zakresie ma wolniejszy czas dostępu, dlatego najwydajniejsze obliczenia wykonują się dla niezależnych wątków działających równolegle na prywatnej pamięci.
 
 
-\subsection{Synchronizacja}\label{sec:OpenC61L}
+\section{Synchronizacja}\label{sec:OpenC61L}
 
 Istnieją dwie domeny synchronizacji w~OpenCL:
 
@@ -202,120 +312,18 @@ Synchronizacja w~obrębie kolejek zadań może odbywać przy użyciu dwóch mech
 
 - Oczekiwanie na wydarzenie. Każda funkcja z interfejsu OpenCL, która kolejkuje zadania, zwraca wydarzenie identyfikujące to zadanie i~wszystkie obiekty pamięci do których się odnosi. Dodatkowe zadanie w~kolejce może czekać na wybrane wydarzenia z różnych zadań i~stanowić punkt synchronizacji. Ten mechanizm może być użyty do synchronizacji pomiędzy kilkoma kolejkami.
 
-\subsection{Obiekty pamięci}\label{sec:OpenC61asdL}
+\section{Obiekty pamięci}\label{sec:OpenC61asdL}
 
 Obiekty pamięci przechowują dane, które mogą być przenoszone pomiędzy pamięcią urządzenia gospodarza a~pamięcią urządzenia OpenCL. Obiekt pamięci jest obsługiwany przez typ \verb|cl_mem| i~może być przekazany jako parametr wejściowy lub wyjściowy do funkcji kernela.
 
-Standard definiuje dwa typy obiektów pamięci: bufor (ang. buffer object) i~obraz (ang. image object). Obiekt bufora przechowuje jednowymiarowy zbiór elementów, natomiast obiekt obrazu może przechowywać dwu- lub trójwymiarowy zbiór elementów albo zbiór buforów. Podstawową różnicą między typami poza wymiarem jest ułożenie danych w~pamięci. Elementy w~buforze są ułożone w~ciągłej pamięci i~możemy się odwoływać do nich poprzez wskaźnik. Rozmieszczenie elementów obrazu nie jest widoczne dla użytkownika, a~dostęp do nich odbywa się poprzez funkcje wbudowane w~język OpenCL C. Elementami bufora mogą być dowolne typy danych obsługiwane przez język kernela, natomiast elementy obrazu stanowią czteroelementowe wektory liczb całkowitych lub zmiennoprzecinkowych. Stanowi to wygodny format do przechowywania plików graficznych. W przypadku przekazywania innego typu danych jako obraz, w~funkcji kernela należy wykonać odpowiednią konwersję i~interpretację danych.
+Standard definiuje dwa typy obiektów pamięci: bufor (ang. buffer object) i~obraz (ang. image object). Obiekt bufora przechowuje jednowymiarowy zbiór elementów, natomiast obiekt obrazu może przechowywać dwu- lub trójwymiarowy zbiór elementów albo zbiór buforów. Podstawową różnicą między typami poza wymiarem jest ułożenie danych w~pamięci. Elementy w~buforze są ułożone w~ciągłej pamięci i~możemy się odwoływać do nich poprzez wskaźnik. Rozmieszczenie elementów obrazu nie jest widoczne dla użytkownika, a~dostęp do nich odbywa się poprzez funkcje wbudowane w~język OpenCL~C. Elementami bufora mogą być dowolne typy danych obsługiwane przez język kernela, natomiast elementy obrazu stanowią czteroelementowe wektory liczb całkowitych lub zmiennoprzecinkowych. Stanowi to wygodny format do przechowywania plików graficznych. W przypadku przekazywania innego typu danych jako obraz, w~funkcji kernela należy wykonać odpowiednią konwersję i~interpretację danych.
+
+\section{Inne środowiska programowania heterogenicznego}\label{sec:OpenC61asdL}
+
+Wzrost popularności wykorzystania kart graficznych do ogólnego użytku doprowadził do powstania wielu środowisk wykorzystujących GPGPU. OpenCL jako jedyny wspiera tak dużą ilość języków i urządzeń. Umożliwia to wykorzystanie OpenCL do pisania aplikacji, możliwych do uruchomienia zarówno na urządzeniach domowych jak i specjalistycznych. Wysoki poziom abstrakcji tego środowiska pozwala na pewien uniwersalizm, jednak ogranicza to niskopoziomowy dostęp do urządzeń i możliwość optymalizacji na wybrane urządzenia. Obecnie dostępne są podobne środowiska programistyczne, takie jak The Xcelerit SDK~\cite{b30},  DirectCompute GPU computing API~\cite{b31}, Alea GPU~\cite{b32}, Close to Metal~\cite{b33} czy C++~AMP~\cite{b34}. Popularne w środowisku naukowym oprogramowanie MATLAB również wspiera obliczenia na GPGPU przy użyciu biblioteki Parallel Computing Toolbox and MATLAB Distributed Computing Server. Powyższe środowiska w~większości są przeznaczone na tylko jedną platformę sprzętową, mają ograniczony interfejs do wybranego zbioru operacji lub wykorzystują specyficzny język programowania. Wybór środowiska może ograniczać użycie aplikacji, ale również zwiększyć jej wydajność.
+
+Obok OpenCL dominującym na rynku środowiskiem jest CUDA utworzone przez Nvidia. Jest to pierwsze i najdłużej rozwijane środowisko wspierające programowanie na GPGPU. Architektura programów pisanych w CUDA jest znacząco podobna do OpenCL - istnieje wiele odpowiedników poszczególnych struktur, funkcji i typów zmiennych. Firma Nvidia produkuje dedykowane karty graficzne dla technologii CUDA co pozwala na lepszą optymalizację kodu na dane urządzenia. W wielu przypadkach technologia CUDA i OpenCL pozwala na uzyskanie zliżonej wydajności~\cite{b35}. Jedynie przy użyciu wyspecjalizowanych kart CUDA pozwala na uzyskanie większej wydajności niż w konkurencyjnych środowiskach. Znacznym ograniczeniem CUDA jest możliwość obliczeń jedynie na urządzeniach Nvidia. Umożliwia to pisanie aplikacji tylko na wyspecjalizowane platformy i nie zapewnia takiej przenośności jak w przypadku OpenCL.
+
 
 %---------------------------------------------------------------------------
-
-\section{Inne środowiska programowania heterogenicznego}\label{sec:others}
-
-\subsection{CUDA}\label{sec:cuda}
-
-\section{Błędy obliczeniowe}\label{sec:errors}
-
-\subsection{Błędy obliczeń numerycznych}\label{sec:numerr}
-
-Wykorzystując do obliczeń cyfrowe układy należy mieć na uwadze, że niemal wszystkie obliczenia numeryczne są obarczone błędem. Źródłami tych błędów są dla metod numerycznych są:
-
-- błędy wejściowe,
-
-- błędy obcięcia,
-
-- błędy zaokrągleń.
-
-Błędy wejściowe związane są błędami danych wejściowych do algorytmu obliczeniowego. Jeśli dana wejściowa jest wynikiem pomiaru wielkości fizycznej, to jest obarczona błędem tego pomiaru. Dodatkowo zapisanie jej w~formacie cyfrowym wprowadza błąd wstępnego zaokrąglenia lub urwania. Wykorzystywane w~obliczeniach stałe, które są niewymierne, również są obarczone błędem wstępnego zaokrąglenia lub urwania. Błąd zaokrąglenia jest mniejszy od błędu urwania, ale nie zawsze zaokrąglenie jest możliwe do wykonania. Przy pomiarach czasu rzeczywistego niektóre przetworniki analogowo-cyfrowe są w~stanie przybliżyć wartość pomiary jedynie przez operację urwania.
-
-Błędy obcięcia występują przy uproszczeniach formuł matematycznych wykorzystywanych w~algorytmie metody numerycznej lub w~obliczaniu wartości funkcji i~stałych. W środowisku cyfrowym większość stałych niewymiernych wyznaczana jest przy użyciu nieskończonych szeregów. Uwzględniając w~obliczeniach skończoną ilość wyrazów szeregu uzyskujemy przybliżoną wartość stałej, a~jej błąd uzależniony jest od ilości obliczonych wyrazów.
-
-Błędy zaokrągleń powstają podczas zaokrąglania wyników wykonywanych operacji arytmetycznych. Każdy kolejny wynik zapisywany jest z pewnym zaokrągleniem, więc każda kolejna operacja wprowadza coraz większy błąd. Wartość tego błędu można zmienić w~zależności od liczby wykonywanych lub przy zmianie kolejności działań. 
-
-\subsection{Cyfrowa reprezentacja liczb}\label{sec:numera}
-
-Technologia w~jakiej wykonywana jest fizyczna pamięć komputerów wymusza do przechowywania liczb i~danych stosowanie systemu binarnego. O ile liczby całkowite do pewnego zakresu mogą być przechowywane z dokładną wartością, o tyle wiele liczb niecałkowitych wymaga zaokrąglenia ze względu na ograniczoną szerokość słowa bitowego. Dla zrównoważenia wielkości zakresu i~precyzji reprezentacji liczb rzeczywistych często używa się typu liczb zmiennoprzecinkowych. Obecnie najczęściej używanym standardem jest IEEE 754 (Wzór 3.1).
-
-\begin{equation}
--1^s\cdot m \cdot 2^e
-\end{equation}
-gdzie
-\begin{eqwhere}[2cm]
-        \item[$s$]znak liczby ( 0 - dla liczby ujemnej, 1 - dla liczby dodatniej)
-        \item[$m$] mantysa liczby
-        \item[$e$] wykładnik, który odpowiada za pozycję przecinka 
-\end{eqwhere}
-
-Powyższy standard definiuje trzy typy danych:
-
-- liczba pojedynczej prezycji (ang. signle precision),
-
-- liczba podwójnej precyzji (ang. double precision),
-
-- liczba o rozszerzonej precyzji (ang. extended precision).
-
-W zależności szerokości bitowej danego typu liczba zmiennoprzecinkowa ma różny zakres i~precyzję (Tabela 3.1).
-
-\begin{table}[h]
-        \centering
-        \begin{threeparttable}
-                \caption{Typy danych w~standardzie IEEE 754.}\label{tab:table_exampleaz}
-                \begin{tabularx}{0.6\textwidth}{| c | c | c | c |}
-                        \midrule
-                        	precyzja	&	szerokosc & mantysa & wykladnik \\
-		pojedyncza  & 32 bitów & 23 bity & 8 bitów \\
-                        podwójna  & 64 bity & 52 bity & 11 bitów \\
-		rozszerzona & 80 bitów & 64 bity & 15 bitów \\
-                        \bottomrule
-                \end{tabularx}
-        \end{threeparttable}
-\end{table}
-
-Zakres danych możliwy do zapisania na poszczególnych typach obrazuje Tabela 3.2, w~której przedstawione są najmniejsze i~największe dodatnie liczby możliwe do zapisania na tych typach.
-
-\begin{table}[h]
-        \centering
-        \begin{threeparttable}
-                \caption{Przybliżone wartości minimalne i~maksymalne dodatnich liczb zmiennoprzecinkowych standardu IEEE 754.}\label{tab:table_exampleazd}
-                \begin{tabularx}{0.6\textwidth}{| c | c | c |}
-                        \midrule
-                        	precyzja	&	w. min. & w. maks. \\
-		pojedyncza  & 1,18 E-38 & 3,40 E+38 \\
-                        podwójna  & 2,23 E-308 & 1,90 E+308 \\
-		rozszerzona &  3,65 E-4951 & 1,18 E+104932 \\
-                        \bottomrule
-                \end{tabularx}
-        \end{threeparttable}
-\end{table}
-
-W standardzie IEEE 754 zostały zdefiniowane następujące metody zaokrąglania liczb:
-
-- Zaokrąglanie do najbliższej wartości (ang. round to nearest),
-
-- zaokrąglanie w~kierunku zera (ang. round toward 0),
-
-- zaokrąglanie w~stronę dodatniej nieskończoności (ang. round toward +infinity),
-
-- zaokrąglanie w~stronę ujemnej nieskończoności (ang. round toward -infinity).
-
-Standard wykorzystuje zaokrąglanie do najbliższej wartośc jako domyślną metodę. W zależności od typu, zaokrąglenie może dać różny wynik. W zależności od procesora lub kompilatora operacje arytmetyczne mogą być wykonywane przy użyciu różnych funkcji procesora, które operują na różnych typach danych. Mimo obliczeń na jednolitym typie danych, wynik może się różnić w~zależności od platformy sprzętowej.
-
-Błąd zaokrąglenia na maszynie cyfrowej zdefiniowany jest przy użyciu dokładnści maszynowej $\epsilon$. Dokładność maszynowa to różnica pomiędzy 1 a~najbliższą jej wartością większą od niej. Zaokrąglenie liczby rzeczywistej do zmiennoprzecinkowej następuje z błędem względnym $\frac{\epsilon}{2}$. Wartości błędu względnego dla poszczególnych typów danych przedstawia Tabela 3.3. 
-
-\begin{table}[h]
-        \centering
-        \begin{threeparttable}
-                \caption{Wartości błędu względnego $\epsilon$ zaokrąglenia dla liczb zmiennoprzecinkowych standardu IEEE 754.}\label{tab:table_exampleazd}
-                \begin{tabularx}{0.6\textwidth}{| c | c |}
-                        \midrule
-                        	precyzja	& $\epsilon$  \\
-		pojedyncza  &  2 E-23\\
-                        podwójna  &  2 E-52\\
-		rozszerzona &  2 E-64\\
-                        \bottomrule
-                \end{tabularx}
-        \end{threeparttable}
-\end{table}
-
-
 
