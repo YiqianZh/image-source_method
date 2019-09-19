@@ -324,60 +324,15 @@ Pomiary przeprowadzono na modelu 1 z rozdziału 6.2.1 (Rysunek~6.1.) dla rzędó
 	\caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla różnych urządzeń.}
 \end{figure}
 
-\begin{table}[H]
-        \centering
-        \begin{threeparttable}
-                \caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla języka C++ i OpenCL. Kod został uruchomiony na architekturze Intel Core i5-2520M (Tabela 6.5).}\label{tab:table_exa2mple}
-                \begin{tabularx}{0.6\textwidth}{| c | X | X | X |}
-                        \midrule
-                        	rząd siatki &	\multicolumn{2}{c}{czas obliczeń [ms]} & \\
-                 \midrule
-		                         & Intel i5 & Radeon R7 & Radeon R9 \\
-                 \midrule
- 5 & 0 & 0  & 0 \\
-6 & 0 & 0 & 0 \\
-7 & 63 & 16 & 16 \\
-8 & 11E2 & 125 & 30 \\
-9 & 23E3 & 14E2 & 843 \\
-10 & 91E3 & 52E2 & 42E2 \\
-11 & 12E4 & 68E2 & 51E2 \\
-12 & 27E4 & 16E4 & 12E2 \\
-                        \bottomrule
-                \end{tabularx}
-        \end{threeparttable}
-\end{table}
-
 W celu sprawdzenia wydajności implementacji algorytmu w~środowisku OpenCL autor porównał czas obliczeń algorytmu w~tym środowisku z czasem obliczeń algorytmu zaimplementowanego przy użyciu czystego kodu C++, bez użycia wielowątkowości (Rysunek~6.14.,~Tabela~6.9.).
 
 \begin{figure}[H]
         \centering
                 \centering
                 \includegraphics[width=16cm]{wykres2}
-	\caption{Zależność czasu obliczeń od używanego środowiska.}
+	\caption{Zależność czasu obliczeń od używanego środowiska na tej samej platformie sprzętowej.}
 \end{figure}
 
-\begin{table}[H]
-        \centering
-        \begin{threeparttable}
-                \caption{Zależność czasu obliczeń od liczby wyliczanych rzędów siatki źródeł pozornych dla różnych urządzeń.}\label{tab:table_exa2mple}
-                \begin{tabularx}{0.6\textwidth}{| c | X | X |}
-                        \midrule
-                        	rząd siatki &	\multicolumn{1}{c}{czas obliczeń [ms]}  & \\
-                 \midrule
-		                         & OpenCL & C++11 \\
-                 \midrule
- 5 & 0 & 1   \\
-6 & 0 & 16  \\
-7 & 63 & 85  \\
-8 & 11E2 & 545  \\
-9 & 23E3 & 33E2  \\
-10 & 91E3 & 22E3  \\
-11 & 12E4 & 16E4 \\
-12 & 27E4 & 95E4  \\
-                        \bottomrule
-                \end{tabularx}
-        \end{threeparttable}
-\end{table}
 
 %---------------------------------------------------------------------------
 
