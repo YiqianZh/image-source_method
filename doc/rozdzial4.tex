@@ -26,7 +26,7 @@ status = clGetPlatformIDs(numPlatforms, platforms, NULL);
 \end{lstlisting}
 \end{program}
 
-Dane wejściowe alokowane są w~pamięci po stronie platformy. Następnie tworzony jest kontekst obliczeniowy (Kod~źr.~3.), który przy użyciu predyrektywy \verb|CL_PRESENT_DEVICE| wybiera , jaki typ urządzenia zostanie wybrany.
+Dane wejściowe alokowane są w~pamięci po stronie platformy. Następnie tworzony jest kontekst obliczeniowy (Kod~źr.~3.), który przy użyciu predyrektywy \verb|CL_PRESENT_DEVICE| wybiera , jaki typ urządzenia zostanie użyty.
 
 \begin{program}[H]
 \caption{Definiowanie kontekstu obliczeniowego}
@@ -114,7 +114,7 @@ kernel = clCreateKernel(program, "templateKernel", &status);
 \end{lstlisting}
 \end{program}
 
-W zależności od wykorzystywanego urządzenia należy dobrać odpowiednio wielkości grup wątków. Zostały one zdefiniowane w~zmiennych globalThreads i~localThreads. Należy zwrócić uwagę, aby nie przekraczały one maksymalnych dopuszczalnych wartości dla danego urządzenia. W tym celu pobierane są informacje z bieżącego urządzenia o maksymalnych dopuszczalnych wartościach (Kod~źr.~8.).
+W zależności od wykorzystywanego urządzenia należy dobrać odpowiednie wielkości grup wątków. Zostały one zdefiniowane w~zmiennych globalThreads i~localThreads. Należy zwrócić uwagę, aby nie przekraczały one maksymalnych dopuszczalnych wartości dla danego urządzenia. W tym celu pobierane są informacje z bieżącego urządzenia o maksymalnych dopuszczalnych wartościach (Kod~źr.~8.).
 
 \begin{program}[H]
 \caption{Pobranie informacji o zasobach urządzenia}
@@ -197,7 +197,7 @@ clEnqueueReadBuffer(
 
 \section{Obsługa aplikacji}\label{sec:oa}
 
-Przed kompilacją programu należy przygotować kod pod urządzenia, na jakich  będzie on wykonywany. W zależności od typu procesora należy zdefiniować dyrektywę \verb|CL_PRESENT_DEVICE| jako \verb|CL_DEVICE_TYPE_CPU| dla procesorów, lub \verb|CL_DEVICE_TYPE_GPU| dla kart graficznych. W zależności od parametrów urządzenia należy odpowiednio zdefiniować rozmiary grup wątków w~zmiennych localThreads i~globalThreads, a~następne skompilować do pliku wykonywalnego dołączając biblioteki standardu OpenCL. Plik wykonywalny przyjmuje dane w~postaci pliku wejściowego o nazwie input.txt. W danym pliku należy zdefiniować w~kolejnych liniach  rząd pozornych źródeł, współrzędne punktu źródła dźwięku i~punktu obserwacji, współczynniki płaszczyzn powierzchni odbijających w~postaci ogólnej, granice powierzchni dla poszczególnych osi oraz współczynniki pochłaniania dźwięku dla każdej powierzchni (Kod~źr.~12).
+Przed kompilacją programu należy przygotować kod pod urządzenia, na jakich  będzie on wykonywany. W zależności od typu procesora należy zdefiniować dyrektywę \verb|CL_PRESENT_DEVICE| jako \verb|CL_DEVICE_TYPE_CPU| dla procesorów lub \verb|CL_DEVICE_TYPE_GPU| dla kart graficznych. Zależnie od parametrów urządzenia należy odpowiednio zdefiniować rozmiary grup wątków w~zmiennych localThreads i~globalThreads, a~następne skompilować do pliku wykonywalnego dołączając biblioteki standardu OpenCL. Plik wykonywalny przyjmuje dane w~postaci pliku wejściowego o nazwie input.txt. W danym pliku należy zdefiniować w~kolejnych liniach  rząd pozornych źródeł, współrzędne punktu źródła dźwięku i~punktu obserwacji, współczynniki płaszczyzn powierzchni odbijających w~postaci ogólnej, granice powierzchni dla poszczególnych osi oraz współczynniki pochłaniania dźwięku dla każdej powierzchni (Kod~źr.~12).
 
 \begin{program}[H]
 \caption{Plik wejściowy programu}
@@ -214,7 +214,7 @@ Przed kompilacją programu należy przygotować kod pod urządzenia, na jakich  
 
 Dane wyjściowe otrzymywane są w~postaci pliku output.txt. Po wykonaniu obliczeń w~pliku znajdują się współrzędne punktów siatki źródeł pozornych wraz z ich energią.
 
-Przy ustawieniu dyrektywy \verb|write_file| na $true$ i~wybraniu kombinacji powierzchni odbijających program wygeneruje plik ze skryptem wejściowym do programu GeoGebra. Wygenerowany skrypt rysuje trójwymiarową grafikę (Rys. 5.3.), na której znajdują się powierzchnie odbijające, punkt źródła dźwięku, punkt pozornego źródła, punkt obserwacji oraz ścieżka promienia dźwiękowego.
+Przy ustawieniu dyrektywy \verb|write_file| na $true$ i~wybraniu kombinacji powierzchni odbijających, program wygeneruje plik ze skryptem wejściowym do programu GeoGebra. Wygenerowany skrypt rysuje trójwymiarową grafikę (Rys. 5.3.), na której znajdują się powierzchnie odbijające, punkt źródła dźwięku, punkt pozornego źródła, punkt obserwacji oraz ścieżka promienia dźwiękowego.
 
 \begin{figure}[H]
         \centering

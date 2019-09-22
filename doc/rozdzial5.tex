@@ -237,7 +237,7 @@ Podczas testów aplikacji użyteczna okazała się możliwość wizualizacji śc
 	\caption{Ścieżka wybranego promienia dźwiękowego dla 8 odbić w~rzucie na płaszczyznę YZ (S - punkt źródła dźwięku, R - punkt obserwacji).}
 \end{figure}
 
-Wizualizacja ścieżek promieni dźwiękowych może być przydatna w~akustyce architektonicznej przy projektowaniu rozmieszczenia ustrojów akustycznych. Rysując promienie dźwiękowe dla pierwszych odbić (Rysunek 6.20.) możemy wyznaczyć punkty, w~których dane odbicia zachodzą~(Rysunek~6.21). Umieszczając materiał o innych właściwościach pochłaniania w~miejscach pierwszych odbić możemy wpłynąć na ilość energii jaka przychodzi do odbiornika w~pierwszych milisekundach, co pozwala bezpośrednio wpłynąć na wskaźniki C50, C80, D50 oraz wskaźnik zrozumiałości mowy.
+Wizualizacja ścieżek promieni dźwiękowych może być przydatna w~akustyce architektonicznej przy projektowaniu rozmieszczenia ustrojów akustycznych. Rysując promienie dźwiękowe dla pierwszych odbić (Rysunek 6.20.) możemy wyznaczyć punkty, w~których dane odbicia zachodzą~(Rysunek~6.21). Umieszczając materiał o innych właściwościach pochłaniania w~miejscach pierwszych odbić, możemy wpłynąć na ilość energii jaka przychodzi do odbiornika w~pierwszych milisekundach, co pozwala bezpośrednio wpłynąć na wskaźniki C50, C80, D50 oraz wskaźnik zrozumiałości mowy.
 
 \begin{figure}[H]
         \centering
@@ -273,7 +273,7 @@ Dla tak przygotowanych modeli możemy wyznaczyć echogramy~(Rysunek 6.22~-~6.22.
 
 \section{Testy wydajnościowe}\label{sec:asdas2d}
 
-Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów – CPU i~GPU. Do pomiarów na CPU posłużył procesor Intel Core i5-2520M (Tabela 6.5). Pomiaru przy użyciu GPU przeprowadzono na kartach Radeon R7 250X (Tabela 6.6) oraz Radeon R9 270X (Tabela 6.7). Obliczenia testowe zostały wykonane na zmiennych o pojedynczej precyzji.
+Testy wydajnościowe przeprowadzono na 2 różnych architekturach procesorów – CPU i~GPU. Do pomiarów na CPU posłużył procesor Intel Core i5-2520M (Tabela 6.5). Pomiary przy użyciu GPU przeprowadzono na kartach Radeon R7 250X (Tabela 6.6) oraz Radeon R9 270X (Tabela 6.7). Obliczenia testowe zostały wykonane na zmiennych o pojedynczej precyzji.
  
 \begin{table}[H]
         \centering
@@ -338,7 +338,7 @@ W celu sprawdzenia wydajności implementacji algorytmu w~środowisku OpenCL auto
 
 \section{Błąd obliczeń}\label{sec:asdas2sd}
 
-Większa część algorytmu metody źródeł pozornych odpowiada za sprawdzenie czy dany promień dźwiękowy istnieje w~danym modelu geometrycznym. Sprawdzenie odpowiada jedynie za decyzję czy dany promień będzie uwzględniany w~siatce źródeł pozornych i~nie wpływa na błąd wyniku końcowego. Błąd obliczonych pozycji siatki źródeł pozornych powstaje w~wyniku narastania błędu zaokrąglenia podczas operacji arytmetycznych związanych z wyznaczaniem kolejnych odbić lustrzanych punktu źródła. Do obliczenia współrzędnej odbicia należy wykonać 4 mnożenia co czterokrotnie zwiększa wartość błędu względnego $\epsilon$. Dla współrzędnych zapisanych w~zmiennych typu float daje to błąd względny równy |$\delta$| = 2 E-21. Dla źródeł pozornych N-tego rzędu wartość tego błędu wzrasta o N razy. Nawet dla źródeł pozornych 16-tego rzędu błąd wynosi |$\delta$| = 2 E-17. W akustyce architektonicznej błędy danych wejściowych są o kilkanaście rzędów wielkości większe od tego błędu przez co może on zostać pominięty w~obliczeniach.\\
+Większa część algorytmu metody źródeł pozornych odpowiada za sprawdzenie, czy dany promień dźwiękowy istnieje w~danym modelu geometrycznym. Sprawdzenie odpowiada jedynie za decyzję, czy dany promień będzie uwzględniany w~siatce źródeł pozornych i~nie wpływa na błąd wyniku końcowego. Błąd obliczonych pozycji siatki źródeł pozornych powstaje w~wyniku narastania błędu zaokrąglenia podczas operacji arytmetycznych związanych z wyznaczaniem kolejnych odbić lustrzanych punktu źródła. Do obliczenia współrzędnej odbicia należy wykonać cztery mnożenia, co czterokrotnie zwiększa wartość błędu względnego $\epsilon$. Dla współrzędnych zapisanych w~zmiennych typu float daje to błąd względny równy |$\delta$| = 2 E-21. Dla źródeł pozornych N-tego rzędu wartość tego błędu wzrasta o N razy. Nawet dla źródeł pozornych 16-tego rzędu błąd wynosi |$\delta$| = 2 E-17. W akustyce architektonicznej błędy danych wejściowych są o kilkanaście rzędów wielkości większe od tego błędu, przez co może on zostać pominięty w~obliczeniach.\\
 
 
 
